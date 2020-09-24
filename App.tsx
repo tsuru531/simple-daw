@@ -4,7 +4,9 @@ import { Router } from "./Router";
 export const App: React.FC = () => {
   return(
     <React.Fragment>
-      <Router />
+      <main>
+        <Router />
+      </main>
     </React.Fragment>
   );
 };
