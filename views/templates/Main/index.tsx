@@ -5,12 +5,14 @@ import { ToolContainer } from './ToolContainer';
 import { Padding8px } from './Padding8px';
 import { ResizeContainer } from './ResizeContainer';
 import { ContentWrapper } from './ContentWrapper';
+import { ToolBar } from '../../components/organisms';
 
 export const Main: React.FC = () => {
   return (
     <MainWrapper>
       <GridContainer>
         <ToolContainer>
+          <ToolBar />
         </ToolContainer>
         <Padding8px>
           <ResizeContainer
