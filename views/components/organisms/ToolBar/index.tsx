@@ -5,7 +5,7 @@ import { ToolItems } from './ToolItems';
 export const ToolBar: React.FC = () => {
   return (
     <Container>
-      <ToolItems.Play />
+      <ToolItems.Play onClick={() => {}} />
     </Container>
   );
 };
