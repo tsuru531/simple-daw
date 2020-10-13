@@ -1,6 +1,8 @@
 import * as Actions from './actions';
 import * as Selectors from './selectors';
 
+let audioContext;
+
 export const play = () => {
   return (dispatch, getState) => {
     const state = getState();
@@ -8,7 +10,7 @@ export const play = () => {
     const bpm: number = Selectors.getBpm(state);
 
     if (!isPlaying) {
-      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+      audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
       const masterVol = audioContext.createGain();
       masterVol.gain.value = 0.1;
       masterVol.connect(audioContext.destination);
@@ -54,6 +56,7 @@ export const stop = () => {
     const isPlaying: boolean = Selectors.getIsPlaying(state);
 
     if (isPlaying) {
+      audioContext.close();
       dispatch(Actions.stopAction());
     };
   };
