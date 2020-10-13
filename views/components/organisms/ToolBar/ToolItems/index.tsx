@@ -1,5 +1,7 @@
 import { Play } from './Play';
+import { Stop } from './Stop';
 
 export const ToolItems = {
-  Play: Play
+  Play: Play,
+  Stop: Stop
 };
