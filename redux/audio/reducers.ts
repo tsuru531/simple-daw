@@ -1,0 +1,18 @@
+import * as Actions from './actions';
+import { initialState } from '../initialState';
+
+export const audioReducer = (state = initialState.audio, action) => {
+  switch (action.type) {
+    case Actions.PLAY:
+      return {
+        ...state,
+        ...action.payload
+      };
+    case Actions.STOP:
+      return {
+        ...state,
+        ...action.payload
+      };
+    default: return state;
+  };
+};
