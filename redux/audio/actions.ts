@@ -17,3 +17,13 @@ export const stopAction = () => {
     }
   }
 };
+
+export const SET_MASTER_OUT = "SET_MASTER_OUT";
+export const setMasterOutAction = (value) => {
+  return {
+    type: "SET_MASTER_OUT",
+    payload: {
+      masterOut: value
+    }
+  };
+};

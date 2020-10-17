@@ -12,6 +12,11 @@ export const getMasterVol = createSelector(
   state => state.masterVol
 );
 
+export const getMasterOut = createSelector(
+  [audioSelector],
+  state => state.masterOut
+);
+
 export const getBpm = createSelector(
   [audioSelector],
   state => state.bpm
