@@ -1,7 +1,8 @@
 import * as Actions from './actions';
 import * as Selectors from './selectors';
 
-let audioContext;
+let audioContext,
+    masterOutInterval;
 
 export const play = () => {
   return (dispatch, getState) => {
@@ -45,6 +46,14 @@ export const play = () => {
         playOsc(item[0], item[1], item[2]);
       };
 
+      const data = new Uint8Array(1);
+      const masterAnalyser = audioContext.createAnalyser();
+      masterVol.connect(masterAnalyser).connect(audioContext.destination);
+      masterOutInterval = setInterval(() => {
+        masterAnalyser.getByteTimeDomainData(data);
+        dispatch(Actions.setMasterOutAction(Math.abs(128 - data[0])));
+      }, 100);
+
       dispatch(Actions.playAction());
     };
   };
@@ -57,6 +66,7 @@ export const stop = () => {
 
     if (isPlaying) {
       audioContext.close();
+      clearInterval(masterOutInterval);
       dispatch(Actions.stopAction());
     };
   };

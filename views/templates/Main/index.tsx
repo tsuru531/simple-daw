@@ -1,13 +1,19 @@
 import * as React from 'react';
+import { useSelector } from 'react-redux';
+import { getMasterOut } from '../../../redux/audio/selectors';
+import { VolumeMeter } from '../../components/atoms';
+import { ToolBar } from '../../components/organisms';
 import { MainWrapper } from './MainWrapper';
 import { GridContainer } from './GridContainer';
 import { ToolContainer } from './ToolContainer';
 import { Padding8px } from './Padding8px';
 import { ResizeContainer } from './ResizeContainer';
 import { ContentWrapper } from './ContentWrapper';
-import { ToolBar } from '../../components/organisms';
 
 export const Main: React.FC = () => {
+  const selecter = useSelector(state => state);
+  const masterOut = getMasterOut(selecter);
+
   return (
     <MainWrapper>
       <GridContainer>
@@ -18,6 +24,7 @@ export const Main: React.FC = () => {
           <ResizeContainer
             topComponent={
               <ContentWrapper>
+                <VolumeMeter value={ masterOut } />
               </ContentWrapper>
             }
             bottomComponent={
