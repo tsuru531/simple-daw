@@ -46,12 +46,24 @@ export const play = () => {
         playOsc(item[0], item[1], item[2]);
       };
 
-      const data = new Uint8Array(1);
+      const convertToVolme = (analyserNode, uint8Array) => {
+        analyserNode.getByteTimeDomainData(uint8Array);
+        const max = uint8Array.reduce((a, b) => {
+          return Math.max(a, b);
+        });
+        const min = uint8Array.reduce((a, b) => {
+          return Math.min(a, b);
+        });
+        const result = Math.max(Math.abs(128 - max), Math.abs(128 - min));
+        return result;
+      };
+
+      const data = new Uint8Array(256);
       const masterAnalyser = audioContext.createAnalyser();
       masterVol.connect(masterAnalyser).connect(audioContext.destination);
       masterOutInterval = setInterval(() => {
-        masterAnalyser.getByteTimeDomainData(data);
-        dispatch(Actions.setMasterOutAction(Math.abs(128 - data[0])));
+        const masterOut = convertToVolme(masterAnalyser, data);
+        dispatch(Actions.setMasterOutAction(masterOut));
       }, 100);
 
       dispatch(Actions.playAction());
