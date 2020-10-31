@@ -24,7 +24,7 @@ const Container = styled.div`
   height: 40px;
   width: 40px;
   border-radius: 50%;
-  background-color: #767676;
+  background-color: inherit;
 `;
 
 const Meter = styled.div<{angle: number, percentage: number}>`
@@ -56,7 +56,7 @@ const Meter = styled.div<{angle: number, percentage: number}>`
     z-index: 3;
     transform-origin: left 50%;
     transform: rotate(${({percentage}) => percentage <= 50 ? 0 : 180}deg);
-    ${({percentage}) => percentage <= 50 ? null : "background-color: #0F0;"}
+    ${({percentage}) => percentage <= 50 ? null : "background-color: #85D1EC;"}
   }
 `;
 
