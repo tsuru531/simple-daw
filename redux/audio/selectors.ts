@@ -12,6 +12,16 @@ export const getMasterVol = createSelector(
   state => state.masterVol
 );
 
+export const getMasterVolPer = createSelector(
+  [audioSelector],
+  state => {
+    const masterVol = state.masterVol;
+    const maxVol = 1;
+    const percentage = masterVol / maxVol * 100;
+    return percentage;
+  }
+);
+
 export const getMasterOut = createSelector(
   [audioSelector],
   state => state.masterOut
