@@ -96,7 +96,7 @@ export const stop = () => {
   };
 };
 
-export const setMasterVol = (value) => {
+export const setMasterVol = (value: number) => {
   return (dispatch) => {
     dispatch(Actions.setMasterVol(value));
   };
