@@ -18,6 +18,16 @@ export const stopAction = () => {
   }
 };
 
+export const SET_MASTER_VOL = "SET_MASTER_VOL";
+export const setMasterVol = (value) => {
+  return {
+    type: "SET_MASTER_VOL",
+    payload: {
+      masterVol: value
+    }
+  }
+};
+
 export const SET_MASTER_OUT = "SET_MASTER_OUT";
 export const setMasterOutAction = (value) => {
   return {
