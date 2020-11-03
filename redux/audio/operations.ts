@@ -101,3 +101,9 @@ export const setMasterVol = (value: number) => {
     dispatch(Actions.setMasterVol(value));
   };
 };
+
+export const setBpm = (value: number) => {
+  return (dispatch) => {
+    dispatch(Actions.setBpm(value));
+  };
+};
