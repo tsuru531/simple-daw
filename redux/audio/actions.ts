@@ -37,3 +37,13 @@ export const setMasterOutAction = (value) => {
     }
   };
 };
+
+export const SET_BPM = "AUDIO/SET_BPM" as const;
+export const setBpm = (value: number) => {
+  return {
+    type: SET_BPM,
+    payload: {
+      bpm: value
+    }
+  };
+};
