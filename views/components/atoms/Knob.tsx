@@ -3,26 +3,38 @@ import styled from 'styled-components';
 
 type propsType = {
   percentage: number;
+  refObject: React.MutableRefObject<HTMLDivElement>;
 }
 
-export const Knob: React.FC<propsType> = ({ percentage }) => {
+export const Knob: React.FC<propsType> = ({ percentage, refObject }) => {
   const angle = 2.7 * percentage;
   return (
     <Container>
-      <Meter angle={angle} percentage={percentage} />
-      <Blanc />
-      <InnerCircle>
-        <Mark angle={angle} />
-      </InnerCircle>
+      <Circle>
+        <Meter angle={angle} percentage={percentage} />
+        <Blanc />
+        <InnerCircle>
+          <Mark angle={angle} />
+        </InnerCircle>
+      </Circle>
+      <Ref ref={refObject}/>
     </Container>
   );
 };
 
 const Container = styled.div`
-  overflow: hidden;
   position: relative;
+  display: inline-block;
   height: 40px;
   width: 40px;
+  background-color: inherit;
+`;
+
+const Circle = styled.div`
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  width: 100%;
   border-radius: 50%;
   background-color: inherit;
 `;
@@ -104,4 +116,13 @@ const Mark = styled.div<{angle: number}>`
     background-color: #333;
     transform: translateY(-50%);
   }
+`;
+
+const Ref = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  height: 100%;
+  width: 100%;
 `;
