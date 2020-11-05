@@ -6,15 +6,16 @@ let audioContext,
 
 export const play = () => {
   return (dispatch, getState) => {
-    const state = getState();
-    const isPlaying: boolean = Selectors.getIsPlaying(state);
-    const bpm: number = Selectors.getBpm(state);
+    const selector = getState();
+    const isPlaying: boolean = Selectors.getIsPlaying(selector);
+    const masterVol: number = Selectors.getMasterVol(selector);
+    const bpm: number = Selectors.getBpm(selector);
 
     if (!isPlaying) {
       audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
-      const masterVol = audioContext.createGain();
-      masterVol.gain.value = 0.1;
-      masterVol.connect(audioContext.destination);
+      const masterGain = audioContext.createGain();
+      masterGain.gain.value = masterVol;
+      masterGain.connect(audioContext.destination);
 
       const familymart = [
         [76, 0, .5],
@@ -37,7 +38,7 @@ export const play = () => {
         const osc = audioContext.createOscillator();
         osc.type = "sawtooth";
         osc.frequency.value = frequency;
-        osc.connect(masterVol);
+        osc.connect(masterGain);
         osc.start(time * seondsPerBeat);
         osc.stop((time + noteLength) * seondsPerBeat);
       };
@@ -72,7 +73,7 @@ export const play = () => {
 
       const data = new Uint8Array(256);
       const masterAnalyser = audioContext.createAnalyser();
-      masterVol.connect(masterAnalyser).connect(audioContext.destination);
+      masterGain.connect(masterAnalyser).connect(audioContext.destination);
       masterOutInterval = setInterval(() => {
         const masterOut = convertToVolume(masterAnalyser, data);
         dispatch(Actions.setMasterOutAction(masterOut));
