@@ -18,6 +18,17 @@ export const stopAction = () => {
   }
 };
 
+export const SET_PLAYING = "AUDIO/SET_PLAYING" as const;
+export const setPlaying = (status: boolean) => {
+  return {
+    type: SET_PLAYING,
+    payload: {
+      isPlaying: status
+    }
+  };
+};
+
+
 export const SET_MASTER_VOL = "SET_MASTER_VOL";
 export const setMasterVol = (value) => {
   return {
