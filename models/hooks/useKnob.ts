@@ -50,7 +50,7 @@ export const useKnob = (
     return () => {
       knobRef.current.removeEventListener('mousedown', mouseDown);
     };
-  }, [isHover]);
+  }, [isHover, isActive]);
 
   useEffect(() => {
     const mouseUp = (): void => {
