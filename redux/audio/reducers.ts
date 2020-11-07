@@ -3,16 +3,6 @@ import { initialState } from '../initialState';
 
 export const audioReducer = (state = initialState.audio, action) => {
   switch (action.type) {
-    case Actions.PLAY:
-      return {
-        ...state,
-        ...action.payload
-      };
-    case Actions.STOP:
-      return {
-        ...state,
-        ...action.payload
-      };
     case Actions.SET_PLAYING:
       return {
         ...state,
