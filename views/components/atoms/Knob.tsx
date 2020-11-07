@@ -7,7 +7,14 @@ type propsType = {
 }
 
 export const Knob: React.FC<propsType> = ({ percentage, refObject }) => {
+  if (percentage > 100) {
+    percentage = 100;
+  };
+  if (percentage < 0) {
+    percentage = 0;
+  };
   const angle = 2.7 * percentage;
+  
   return (
     <Container>
       <Circle>
