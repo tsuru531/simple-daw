@@ -59,8 +59,6 @@ export const play = () => {
         return result;
       };
 
-
-
       const data = new Uint8Array(256);
       const masterAnalyser = audioContext.createAnalyser();
       masterGain.connect(masterAnalyser).connect(audioContext.destination);
@@ -69,20 +67,20 @@ export const play = () => {
         dispatch(Actions.setMasterOutAction(masterOut));
       }, 100);
 
-      dispatch(Actions.playAction());
+      dispatch(Actions.setPlaying(true));
     };
   };
 };
 
 export const stop = () => {
   return (dispatch, getState) => {
-    const state = getState();
-    const isPlaying: boolean = Selectors.getIsPlaying(state);
+    const selector = getState();
+    const isPlaying: boolean = Selectors.getIsPlaying(selector);
 
     if (isPlaying) {
       audioContext.close();
       clearInterval(masterOutInterval);
-      dispatch(Actions.stopAction());
+      dispatch(Actions.setPlaying(false));
     };
   };
 };
