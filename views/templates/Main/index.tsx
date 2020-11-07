@@ -9,10 +9,12 @@ import { ToolContainer } from './ToolContainer';
 import { Padding8px } from './Padding8px';
 import { ResizeContainer } from './ResizeContainer';
 import { ContentWrapper } from './ContentWrapper';
+import { MasterVolKnob } from './MasterVolKnob';
 
 export const Main: React.FC = () => {
   const selecter = useSelector(state => state);
   const masterOut = getMasterOut(selecter);
+
 
   return (
     <MainWrapper>
@@ -24,6 +26,7 @@ export const Main: React.FC = () => {
           <ResizeContainer
             topComponent={
               <ContentWrapper>
+                <MasterVolKnob />
                 <VolumeMeter value={ masterOut } />
               </ContentWrapper>
             }
