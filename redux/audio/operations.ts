@@ -47,16 +47,6 @@ export const play = () => {
         playOsc(item[0], item[1], item[2]);
       };
 
-      class volume {
-        analyserNode: any;
-        uint8Array: number[];
-
-        constructor(analyserNode, uint8Array) {
-          this.analyserNode = analyserNode;
-          this.uint8Array = uint8Array;
-        };
-      };
-
       const convertToVolume = (analyserNode, uint8Array) => {
         analyserNode.getByteTimeDomainData(uint8Array);
         const max = uint8Array.reduce((a, b) => {
