@@ -13,7 +13,7 @@ export const audioReducer = (state = initialState.audio, action) => {
         ...state,
         ...action.payload
       };
-    case Actions.SET_MASTER_OUT:
+    case Actions.SET_MASTER_LEVEL:
       return {
         ...state,
         ...action.payload

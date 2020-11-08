@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
-import { getMasterOut } from '../../../redux/audio/selectors';
+import { getMasterLevel } from '../../../redux/audio/selectors';
 import { VolumeMeter } from '../../components/atoms';
 import { ToolBar } from '../../components/organisms';
 import { MainWrapper } from './MainWrapper';
@@ -13,7 +13,7 @@ import { MasterVolKnob } from './MasterVolKnob';
 
 export const Main: React.FC = () => {
   const selecter = useSelector(state => state);
-  const masterOut = getMasterOut(selecter);
+  const masterLevel = getMasterLevel(selecter);
 
 
   return (
@@ -27,7 +27,7 @@ export const Main: React.FC = () => {
             topComponent={
               <ContentWrapper>
                 <MasterVolKnob />
-                <VolumeMeter value={ masterOut } />
+                <VolumeMeter value={ masterLevel } />
               </ContentWrapper>
             }
             bottomComponent={

@@ -63,8 +63,8 @@ export const play = () => {
       const masterAnalyser = audioContext.createAnalyser();
       masterGain.connect(masterAnalyser).connect(audioContext.destination);
       masterOutInterval = setInterval(() => {
-        const masterOut = convertToVolume(masterAnalyser, data);
-        dispatch(Actions.setMasterOutAction(masterOut));
+        const masterLevel = convertToVolume(masterAnalyser, data);
+        dispatch(Actions.setMasterLevel(masterLevel));
       }, 100);
 
       dispatch(Actions.setPlaying(true));

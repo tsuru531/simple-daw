@@ -19,12 +19,12 @@ export const setMasterVol = (value) => {
   }
 };
 
-export const SET_MASTER_OUT = "SET_MASTER_OUT";
-export const setMasterOutAction = (value) => {
+export const SET_MASTER_LEVEL = "SET_MASTER_LEVEL" as const;
+export const setMasterLevel = (value: number) => {
   return {
-    type: "SET_MASTER_OUT",
+    type: "SET_MASTER_LEVEL",
     payload: {
-      masterOut: value
+      masterLevel: value
     }
   };
 };

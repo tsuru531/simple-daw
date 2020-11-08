@@ -22,9 +22,9 @@ export const getMasterVolPer = createSelector(
   }
 );
 
-export const getMasterOut = createSelector(
+export const getMasterLevel = createSelector(
   [audioSelector],
-  state => state.masterOut
+  state => state.masterLevel
 );
 
 export const getBpm = createSelector(
