@@ -31,3 +31,8 @@ export const getBpm = createSelector(
   [audioSelector],
   state => state.bpm
 );
+
+export const getNotes = createSelector(
+  [audioSelector],
+  state => state.notes
+);
