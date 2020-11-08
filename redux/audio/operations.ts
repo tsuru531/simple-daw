@@ -1,36 +1,23 @@
 import * as Actions from './actions';
 import * as Selectors from './selectors';
+import * as Types from './types';
 
 let audioContext,
     masterOutInterval;
 
 export const play = () => {
   return (dispatch, getState) => {
-    const selector = getState();
+    const selector: Types.state = getState();
     const isPlaying: boolean = Selectors.getIsPlaying(selector);
     const masterVol: number = Selectors.getMasterVol(selector);
     const bpm: number = Selectors.getBpm(selector);
+    const notes: Types.note[] = Selectors.getNotes(selector);
 
     if (!isPlaying) {
       audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
       const masterGain = audioContext.createGain();
       masterGain.gain.value = masterVol;
       masterGain.connect(audioContext.destination);
-
-      const familymart = [
-        [76, 0, .5],
-        [72, .5, .5],
-        [67, 1, .5],
-        [72, 1.5, .5],
-        [74, 2, .5],
-        [79, 2.5, 1],
-        [67, 3.5, .5],
-        [74, 4, .5],
-        [76, 4.5, .5],
-        [74, 5, .5],
-        [67, 5.5, .5],
-        [72, 6, 1]
-      ];
 
       const playOsc = (noteNum, time, noteLength) => {
         const seondsPerBeat = 60 / bpm;
@@ -43,8 +30,8 @@ export const play = () => {
         osc.stop((time + noteLength) * seondsPerBeat);
       };
 
-      for (let item of familymart) {
-        playOsc(item[0], item[1], item[2]);
+      for (let note of notes) {
+        playOsc(note.keyNum, note.startTime, note.length);
       };
 
       const convertToVolume = (analyserNode, uint8Array) => {
