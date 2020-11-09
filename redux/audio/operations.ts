@@ -89,3 +89,13 @@ export const setBpm = (value: number) => {
     dispatch(Actions.setBpm(value));
   };
 };
+
+export const addNote = (note: Types.note) => {
+  return (dispatch, getState) => {
+    const selector: Types.state = getState();
+    const notes: Types.note[] = Selectors.getNotes(selector);
+
+    notes.push(note);
+    dispatch(Actions.setNotes(notes));
+  };
+};
