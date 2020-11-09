@@ -1,3 +1,5 @@
+import * as Types from './types';
+
 export const SET_PLAYING = "AUDIO/SET_PLAYING" as const;
 export const setPlaying = (status: boolean) => {
   return {
@@ -35,6 +37,16 @@ export const setBpm = (value: number) => {
     type: SET_BPM,
     payload: {
       bpm: value
+    }
+  };
+};
+
+export const SET_NOTES = "AUDIO/SET_NOTES" as const;
+export const setNotes = (notes: Types.note[]) => {
+  return {
+    type: SET_NOTES,
+    payload: {
+      notes: notes
     }
   };
 };

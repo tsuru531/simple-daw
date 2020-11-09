@@ -23,6 +23,11 @@ export const audioReducer = (state = initialState.audio, action) => {
         ...state,
         ...action.payload
       };
+    case Actions.SET_NOTES:
+      return {
+        ...state,
+        ...action.payload
+      };
     default: return state;
   };
 };
