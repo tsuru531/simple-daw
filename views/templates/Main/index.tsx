@@ -23,11 +23,11 @@ export const Main: React.FC = () => {
             topComponent={
               <ContentWrapper>
                 <MasterVolKnob />
-                <Notes />
               </ContentWrapper>
             }
             bottomComponent={
               <ContentWrapper>
+                <Notes />
               </ContentWrapper>
             }
           />
