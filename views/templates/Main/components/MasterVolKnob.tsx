@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
-import { getMasterVolPer } from '../../../redux/audio';
-import { useMasterVolKnob } from '../../../models/hooks/useMasterVolKnob';
-import { Knob } from '../../components/atoms';
+import { getMasterVolPer } from '../../../../redux/audio';
+import { useMasterVolKnob } from '../../../../models/hooks/useMasterVolKnob';
+import { Knob } from '../../../components/atoms';
 
 export const MasterVolKnob: React.FC = () => {
   const selecter = useSelector(state => state);

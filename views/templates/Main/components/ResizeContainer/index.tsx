@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useResize } from '../../../../models/hooks/useResize';
+import { useResize } from '../../../../../models/hooks/useResize';
 import { Container } from './Container';
 import { ResizeBar } from './ResizeBar';
 import { TopContainer } from './TopContainer';
