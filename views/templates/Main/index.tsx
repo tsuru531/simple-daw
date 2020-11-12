@@ -8,7 +8,8 @@ import {
   ResizeContainer,
   ContentWrapper,
   MasterVolKnob,
-  Notes
+  Notes,
+  NoteInput
 } from './components';
 
 export const Main: React.FC = () => {
@@ -23,6 +24,7 @@ export const Main: React.FC = () => {
             topComponent={
               <ContentWrapper>
                 <MasterVolKnob />
+                <NoteInput />
               </ContentWrapper>
             }
             bottomComponent={
