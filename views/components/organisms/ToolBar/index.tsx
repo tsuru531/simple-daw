@@ -5,10 +5,11 @@ import { getIsPlaying } from '../../../../redux/audio/selectors';
 import { Container } from './Container';
 import { BpmInput } from './BpmInput';
 import { ToolItems } from './ToolItems';
+import { Types } from 'src/redux/audio';
 
 export const ToolBar: React.FC = () => {
   const dispatch = useDispatch();
-  const selector = useSelector(state => state);
+  const selector = useSelector((state: Types.state) => state);
   const isPlaying = getIsPlaying(selector);
 
   return (

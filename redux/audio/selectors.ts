@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
+import * as Types from './types';
 
-const audioSelector = state => state.audio;
+const audioSelector = (state: Types.state) => state.audio;
 
 export const getIsPlaying = createSelector(
   [audioSelector],

@@ -6,7 +6,7 @@ import { NotesWrapper } from './NotesWrapper';
 
 export const Notes: React.FC = () => {
   const dispatch = useDispatch();
-  const selector = useSelector(state => state);
+  const selector = useSelector((state: Types.state) => state);
   const notes: Types.note[] = getNotes(selector);
 
   return (
