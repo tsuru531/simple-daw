@@ -111,3 +111,13 @@ export const addNote = (
     dispatch(Actions.setNotes(notes));
   };
 };
+
+export const deleteNote = (id: string) => {
+  return (dispatch, getState) => {
+    const selector: Types.state = getState();
+    const notes: Types.note[] = Selectors.getNotes(selector);
+    const newNotes: Types.note[] = notes.filter(note => note.id !== id);
+
+    dispatch(Actions.setNotes(newNotes));
+  };
+};
