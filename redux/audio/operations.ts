@@ -91,6 +91,18 @@ export const setBpm = (value: number) => {
   };
 };
 
+export const addTrack = () => {
+  return (dispatch, getState) => {
+    const selector: Types.state = getState();
+    const tracks: Types.track[] = Selectors.getTracks(selector);
+    const id: string = createUniqueString();
+    const track: Types.track = {id: id, vol: 0.1, type: "sawtooth"};
+
+    tracks.push(track);
+    dispatch(Actions.setTracks(tracks));
+  };
+};
+
 export const addNote = (
   keyNum: number,
   startTime: number,
