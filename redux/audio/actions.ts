@@ -41,6 +41,19 @@ export const setBpm = (value: number) => {
   };
 };
 
+export const SET_TRACKS = "AUDIO/SET_TRACKS" as const;
+export const setTracks = (tracks: Types.track[]): {
+  type: typeof SET_TRACKS,
+  payload: {tracks: Types.track[]}
+} => {
+  return {
+    type: SET_TRACKS,
+    payload: {
+      tracks: tracks
+    }
+  };
+};
+
 export const SET_NOTES = "AUDIO/SET_NOTES" as const;
 export const setNotes = (notes: Types.note[]) => {
   return {
