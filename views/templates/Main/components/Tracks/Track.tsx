@@ -8,7 +8,7 @@ type props = {
 export const Track: React.FC<props> = ({ id }) => {
   return (
     <div>
-      <p>id: {id}</p>
+      id: {id}
       <NoteInput />
     </div>
   );
