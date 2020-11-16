@@ -7,9 +7,9 @@ import {
   Padding8px,
   ResizeContainer,
   ContentWrapper,
+  Tracks,
   MasterVolKnob,
   Notes,
-  NoteInput
 } from './components';
 
 export const Main: React.FC = () => {
@@ -23,8 +23,8 @@ export const Main: React.FC = () => {
           <ResizeContainer
             topComponent={
               <ContentWrapper>
+                <Tracks />
                 <MasterVolKnob />
-                <NoteInput />
               </ContentWrapper>
             }
             bottomComponent={
