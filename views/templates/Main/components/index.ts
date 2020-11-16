@@ -8,3 +8,4 @@ export { MasterVolKnob } from './MasterVolKnob';
 export { ToolBar } from './ToolBar';
 export { Notes } from './Notes';
 export { NoteInput } from './NoteInput';
+export { Tracks } from './Tracks';
