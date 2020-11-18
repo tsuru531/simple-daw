@@ -62,6 +62,18 @@ export const getTrackVol = (state, id: string) => {
   )(state);
 };
 
+export const getTrackVolPer = (state, id: string) => {
+  return createSelector(
+    [audioSelector],
+    state => {
+      const volume = getTrackVol(state, id);
+      const maxVol = 1;
+      const percentage = volume / maxVol * 100;
+      return percentage;
+    }
+  )(state);
+};
+
 export const getNotes = createSelector(
   [audioSelector],
   state => state.notes
