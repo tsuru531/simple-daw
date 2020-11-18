@@ -6,6 +6,16 @@ import { createUniqueString } from '../../models';
 let audioContext,
     masterOutInterval;
 
+const adjustVolume = (volume: number): number => {
+  if (volume > 1) {
+    volume = 1;
+  };
+  if (volume < 0) {
+    volume = 0;
+  };
+  return volume;
+};
+
 export const play = () => {
   return (dispatch, getState) => {
     const selector: Types.state = getState();
@@ -110,6 +120,20 @@ export const updateTrack = (newTrack: Types.track) => {
     const newTracks: Types.track[] = tracks.map(track => (track.id === newTrack.id) ? newTrack : track);
 
     dispatch(Actions.setTracks(newTracks));
+  };
+};
+
+export const setTrackVol = (id: string, volume: number) => {
+  return (dispatch, getState) => {
+    const selector: Types.state = getState();
+    const adjustedVolume = adjustVolume(volume);
+    const track: Types.track = Selectors.getTrack(selector, id);
+    const newTrack: Types.track = {
+      ...track,
+      vol: adjustedVolume
+    };
+
+    dispatch(updateTrack(newTrack));
   };
 };
 
