@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addNote } from '../../../../redux/audio';
+import { addNote } from '../../../../../../redux/audio';
 
 export const NoteInput: React.FC = () => {
   const dispatch = useDispatch();

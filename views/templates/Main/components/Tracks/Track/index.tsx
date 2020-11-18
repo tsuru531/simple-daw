@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NoteInput } from '../';
+import { NoteInput } from './NoteInput';
 
 type props = {
   id: string
