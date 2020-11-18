@@ -97,9 +97,9 @@ export const addTrack = () => {
     const tracks: Types.track[] = Selectors.getTracks(selector);
     const id: string = createUniqueString();
     const track: Types.track = {id: id, vol: 0.1, type: "sawtooth"};
+    const newTracks: Types.track[] = [...tracks, track];
 
-    tracks.push(track);
-    dispatch(Actions.setTracks(tracks));
+    dispatch(Actions.setTracks(newTracks));
   };
 };
 
