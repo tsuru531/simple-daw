@@ -54,8 +54,9 @@ export const getTrackVol = (state, id: string) => {
   return createSelector(
     [audioSelector],
     state => {
-      const track: Types.track = getTrack(state, id);
-      const volume: number = track.vol;
+      const tracks = state.tracks as Types.track[];
+      const matchTrack = tracks.find(track => track.id === id);
+      const volume: number = matchTrack.vol;
 
       return volume;
     }
@@ -66,9 +67,12 @@ export const getTrackVolPer = (state, id: string) => {
   return createSelector(
     [audioSelector],
     state => {
-      const volume = getTrackVol(state, id);
+      const tracks = state.tracks as Types.track[];
+      const matchTrack = tracks.find(track => track.id === id);
+      const volume = matchTrack.vol;
       const maxVol = 1;
       const percentage = volume / maxVol * 100;
+
       return percentage;
     }
   )(state);
