@@ -38,6 +38,17 @@ export const getTracks = createSelector(
   state => <Types.track[]>state.tracks
 );
 
+export const getTrack = (state, id: string) => {
+  return createSelector(
+    [audioSelector],
+    state => {
+      const tracks = state.tracks as Types.track[];
+      const matchTrack = tracks.find(track => track.id === id);
+
+      return matchTrack;
+    }
+  )(state);
+};
 
 export const getNotes = createSelector(
   [audioSelector],
