@@ -103,6 +103,16 @@ export const addTrack = () => {
   };
 };
 
+export const updateTrack = (newTrack: Types.track) => {
+  return (dispatch, getState) => {
+    const selector: Types.state = getState();
+    const tracks: Types.track[] = Selectors.getTracks(selector);
+    const newTracks: Types.track[] = tracks.map(track => (track.id === newTrack.id) ? newTrack : track);
+
+    dispatch(Actions.setTracks(newTracks));
+  };
+};
+
 export const addNote = (
   keyNum: number,
   startTime: number,
