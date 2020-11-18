@@ -11,10 +11,16 @@ export const Tracks: React.FC = () => {
 
   return (
     <TracksWrapper>
-      {tracks.map(track => {
-        const id = track.id;
-        return <Track id={id} />
-      })}
+      <ul>
+        {tracks.map(track => {
+          const id = track.id;
+          return (
+            <li key={id}>
+              <Track id={id} />
+            </li>
+          )
+        })}
+      </ul>
       <button onClick={() => dispatch(addTrack())}>addTrack</button>
     </TracksWrapper>
   );
