@@ -4,10 +4,13 @@ export type state = typeof initialState;
 
 export type wave = "sine" | "square" | "sawtooth" | "triangle";
 
-export type track = {
-  id: string,
+export type trackState = {
   vol: number,
   type: wave
+};
+
+export type track = trackState & {
+  id: string
 };
 
 export type note = {
