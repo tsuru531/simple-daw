@@ -50,6 +50,18 @@ export const getTrack = (state, id: string) => {
   )(state);
 };
 
+export const getTrackVol = (state, id: string) => {
+  return createSelector(
+    [audioSelector],
+    state => {
+      const track: Types.track = getTrack(state, id);
+      const volume: number = track.vol;
+
+      return volume;
+    }
+  )(state);
+};
+
 export const getNotes = createSelector(
   [audioSelector],
   state => state.notes
