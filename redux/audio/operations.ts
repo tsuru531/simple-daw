@@ -137,6 +137,16 @@ export const setTrackVol = (id: string, volume: number) => {
   };
 };
 
+export const deleteTrack = (id: string) => {
+  return (dispatch, getState) => {
+    const selector: Types.state = getState();
+    const tracks: Types.track[] = Selectors.getTracks(selector);
+    const newTracks: Types.track[] = tracks.filter(track => track.id !== id);
+
+    dispatch(Actions.setTracks(newTracks));
+  };
+};
+
 export const addNote = (
   keyNum: number,
   startTime: number,
