@@ -147,20 +147,17 @@ export const deleteTrack = (id: string) => {
   };
 };
 
-export const addNote = (
-  keyNum: number,
-  startTime: number,
-  length: number
-) => {
+export const addNote = (noteState: Types.noteState) => {
   return (dispatch, getState) => {
     const selector: Types.state = getState();
     const notes: Types.note[] = Selectors.getNotes(selector);
     const id: string = createUniqueString();
     const note: Types.note = {
       id: id,
-      keyNum: keyNum,
-      startTime: startTime,
-      length: length
+      keyNum: noteState.keyNum,
+      startTime: noteState.startTime,
+      length: noteState.length,
+      trackId: noteState.trackId,
     };
 
     notes.push(note);

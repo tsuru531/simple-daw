@@ -1,9 +1,13 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addNote } from '../../../../../../redux/audio';
+import { addNote, Types } from '../../../../../../redux/audio';
 
-export const NoteInput: React.FC = () => {
+type props = {
+  trackId: string
+};
+
+export const NoteInput: React.FC<props> = ({ trackId }) => {
   const dispatch = useDispatch();
 
   const [keyNum, setKeyNum] = useState<number>();
@@ -22,8 +26,11 @@ export const NoteInput: React.FC = () => {
     setLength(value);
   };
 
-  const onClick = () => {
-    dispatch(addNote(keyNum, startTime, length));
+  const noteState: Types.noteState = {
+    keyNum: keyNum,
+    startTime: startTime,
+    length: length,
+    trackId: trackId,
   };
 
   return (
@@ -34,7 +41,7 @@ export const NoteInput: React.FC = () => {
       <input name="startTime" type="number" value={startTime} onChange={onChangeStartTime} />
       <label htmlFor="length">length</label>
       <input name="length" type="number" value={length} onChange={onChangeLength} />
-      <button onClick={onClick}>addNote</button>
+      <button onClick={() => dispatch(addNote(noteState))}>addNote</button>
     </div>
   );
 };

@@ -13,9 +13,13 @@ export type track = trackState & {
   id: string
 };
 
-export type note = {
-  id: string,
+export type noteState = {
   keyNum: number,
   startTime: number,
   length: number,
+  trackId: string
 };
+
+export type note = {
+  id: string,
+} & noteState;
