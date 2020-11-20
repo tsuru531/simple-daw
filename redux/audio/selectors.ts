@@ -33,6 +33,16 @@ export const getBpm = createSelector(
   state => state.bpm
 );
 
+export const getSecondsPerBeat = createSelector(
+  [audioSelector],
+  state => {
+    const bpm = state.bpm;
+    const secondsPerBeat = 60 / bpm;
+
+    return secondsPerBeat;
+  }
+);
+
 export const getTracks = createSelector(
   [audioSelector],
   state => <Types.track[]>state.tracks
