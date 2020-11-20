@@ -141,9 +141,12 @@ export const deleteTrack = (id: string) => {
   return (dispatch, getState) => {
     const selector: Types.state = getState();
     const tracks: Types.track[] = Selectors.getTracks(selector);
+    const notes: Types.note[] = Selectors.getNotes(selector);
     const newTracks: Types.track[] = tracks.filter(track => track.id !== id);
+    const newNotes: Types.note[] = notes.filter(note => note.trackId !== id);
 
     dispatch(Actions.setTracks(newTracks));
+    dispatch(Actions.setNotes(newNotes));
   };
 };
 
