@@ -1,10 +1,11 @@
 import * as Actions from './actions';
 import * as Selectors from './selectors';
 import * as Types from './types';
-import { createUniqueString } from '../../models';
+import { createUniqueString, toFrequency } from '../../models';
 
 let audioContext,
-    masterOutInterval;
+    masterGain,
+    masterLevelInterval;
 
 const adjustVolume = (volume: number): number => {
   if (volume > 1) {
@@ -16,33 +17,43 @@ const adjustVolume = (volume: number): number => {
   return volume;
 };
 
+const playOsc = (selector: Types.state, noteState: Types.noteState) => {
+  const seondsPerBeat = Selectors.getSecondsPerBeat(selector);
+  const track: Types.track = Selectors.getTrack(selector, noteState.trackId);
+  const type: Types.wave = track.type;
+  const frequency = toFrequency(noteState.keyNum);
+  const osc = audioContext.createOscillator();
+  const gain = audioContext.createGain();
+
+  gain.gain.value = track.vol;
+  osc.type = type;
+  osc.frequency.value = frequency;
+  osc.connect(gain).connect(masterGain);
+  osc.start(noteState.startTime * seondsPerBeat);
+  osc.stop((noteState.startTime + noteState.length) * seondsPerBeat);
+};
+
 export const play = () => {
   return (dispatch, getState) => {
     const selector: Types.state = getState();
     const isPlaying: boolean = Selectors.getIsPlaying(selector);
     const masterVol: number = Selectors.getMasterVol(selector);
-    const bpm: number = Selectors.getBpm(selector);
     const notes: Types.note[] = Selectors.getNotes(selector);
 
     if (!isPlaying) {
       audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
-      const masterGain = audioContext.createGain();
+      masterGain = audioContext.createGain();
       masterGain.gain.value = masterVol;
       masterGain.connect(audioContext.destination);
 
-      const playOsc = (noteNum, time, noteLength) => {
-        const seondsPerBeat = 60 / bpm;
-        const frequency = 440 * Math.pow(2, (noteNum - 69) / 12);
-        const osc = audioContext.createOscillator();
-        osc.type = "sawtooth";
-        osc.frequency.value = frequency;
-        osc.connect(masterGain);
-        osc.start(time * seondsPerBeat);
-        osc.stop((time + noteLength) * seondsPerBeat);
-      };
-
       for (let note of notes) {
-        playOsc(note.keyNum, note.startTime, note.length);
+        const noteState: Types.noteState = {
+          keyNum: note.keyNum,
+          startTime: note.startTime,
+          length: note.length,
+          trackId: note.trackId
+        }
+        playOsc(selector, noteState);
       };
 
       const convertToVolume = (analyserNode, uint8Array) => {
@@ -60,7 +71,7 @@ export const play = () => {
       const data = new Uint8Array(256);
       const masterAnalyser = audioContext.createAnalyser();
       masterGain.connect(masterAnalyser).connect(audioContext.destination);
-      masterOutInterval = setInterval(() => {
+      masterLevelInterval = setInterval(() => {
         const masterLevel = convertToVolume(masterAnalyser, data);
         dispatch(Actions.setMasterLevel(masterLevel));
       }, 100);
@@ -77,7 +88,7 @@ export const stop = () => {
 
     if (isPlaying) {
       audioContext.close();
-      clearInterval(masterOutInterval);
+      clearInterval(masterLevelInterval);
       dispatch(Actions.setPlaying(false));
     };
   };
