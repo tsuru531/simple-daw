@@ -41,6 +41,20 @@ export const setBpm = (value: number) => {
   };
 };
 
+export const SET_SELECTED_TRACK = "AUDIO/SET_SELECTED_TRACK" as const;
+export const setSelectedTrack = (trackId: string): {
+  type: typeof SET_SELECTED_TRACK,
+  payload: {selectedTrack: string}
+} => {
+  return {
+    type: SET_SELECTED_TRACK,
+    payload: {
+      selectedTrack: trackId
+    }
+  };
+};
+
+
 export const SET_TRACKS = "AUDIO/SET_TRACKS" as const;
 export const setTracks = (tracks: Types.track[]): {
   type: typeof SET_TRACKS,

@@ -23,6 +23,11 @@ export const audioReducer = (state = initialState.audio, action) => {
         ...state,
         ...action.payload
       };
+    case Actions.SET_SELECTED_TRACK:
+      return {
+        ...state,
+        ...action.payload
+      };
     case Actions.SET_TRACKS:
       return {
         ...state,
