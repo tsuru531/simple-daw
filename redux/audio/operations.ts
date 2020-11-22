@@ -112,6 +112,12 @@ export const setBpm = (value: number) => {
   };
 };
 
+export const setSelectedTrack = (trackId: string) => {
+  return (dispatch) => {
+    dispatch(Actions.setSelectedTrack(trackId));
+  };
+};
+
 export const addTrack = () => {
   return (dispatch, getState) => {
     const selector: Types.state = getState();
