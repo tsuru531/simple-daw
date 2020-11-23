@@ -13,10 +13,10 @@ export const Tracks: React.FC = () => {
     <TracksWrapper>
       <ul>
         {tracks.map(track => {
-          const id = track.id;
+          const trackId = track.id;
           return (
-            <li key={id}>
-              <Track id={id} />
+            <li key={trackId}>
+              <Track trackId={trackId} />
             </li>
           )
         })}

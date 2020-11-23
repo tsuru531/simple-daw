@@ -6,17 +6,17 @@ import { NoteInput } from './NoteInput';
 import { DeleteButton } from './DeleteButton';
 
 type props = {
-  id: string
+  trackId: string
 };
 
-export const Track: React.FC<props> = ({ id }) => {
+export const Track: React.FC<props> = ({ trackId }) => {
   return (
-    <TrackWrapper trackId={id}>
-      id: {id}
-      <TypeInput id={id} />
-      <TrackVolKnob id={id} />
-      <NoteInput trackId={id} />
-      <DeleteButton id={id} />
+    <TrackWrapper trackId={trackId}>
+      id: {trackId}
+      <TypeInput id={trackId} />
+      <TrackVolKnob trackId={trackId} />
+      <NoteInput trackId={trackId} />
+      <DeleteButton id={trackId} />
     </TrackWrapper>
   );
 };

@@ -1,21 +1,21 @@
 import * as React from 'react';
-import { useSelector } from 'react-redux';
-import { getTrackVolPer, Types } from '../../../../../../redux/audio';
-import { useTrackVolKnob } from '../../../../../../models/hooks/useTrackVolKnob';
-import { Knob, MountRef } from '../../../../../components/atoms/Knob';
+import styled from 'styled-components';
+import { TrackVolKnob as Knob } from '../../../../../components/molecules';
 
 type props = {
-  id: string
-};
+  trackId: string
+}
 
-export const TrackVolKnob: React.FC<props> = ({ id }) => {
-  const selecter = useSelector((state: Types.state) => state);
-  const percentage = getTrackVolPer(selecter, id);
-  const ref = useTrackVolKnob(id);
-
+export const TrackVolKnob: React.FC<props> = ({ trackId }) => {
   return (
-    <MountRef refObject={ref}>
-      <Knob percentage={percentage} />
-    </MountRef>
+    <Container>
+      <Knob trackId={trackId} />
+    </Container>
   );
 };
+
+const Container = styled.div`
+  display: inline-block;
+  padding: 8px;
+  background-color: inherit;
+`;
