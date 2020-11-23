@@ -1,12 +1,13 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { Circle } from './Circle';
+export { MountRef } from './MountRef';
 
 type propsType = {
   percentage: number;
-  refObject: React.MutableRefObject<HTMLDivElement>;
 }
 
-export const Knob: React.FC<propsType> = ({ percentage, refObject }) => {
+export const Knob: React.FC<propsType> = ({ percentage }) => {
   if (percentage > 100) {
     percentage = 100;
   };
@@ -14,9 +15,8 @@ export const Knob: React.FC<propsType> = ({ percentage, refObject }) => {
     percentage = 0;
   };
   const angle = 2.7 * percentage;
-  
+
   return (
-    <Container>
       <Circle>
         <Meter angle={angle} percentage={percentage} />
         <Blanc />
@@ -24,27 +24,8 @@ export const Knob: React.FC<propsType> = ({ percentage, refObject }) => {
           <Mark angle={angle} />
         </InnerCircle>
       </Circle>
-      <Ref ref={refObject}/>
-    </Container>
   );
 };
-
-const Container = styled.div`
-  position: relative;
-  display: inline-block;
-  height: 40px;
-  width: 40px;
-  background-color: inherit;
-`;
-
-const Circle = styled.div`
-  overflow: hidden;
-  position: relative;
-  height: 100%;
-  width: 100%;
-  border-radius: 50%;
-  background-color: inherit;
-`;
 
 const Meter = styled.div<{angle: number, percentage: number}>`
   z-index: 1;
@@ -123,13 +104,4 @@ const Mark = styled.div<{angle: number}>`
     background-color: #333;
     transform: translateY(-50%);
   }
-`;
-
-const Ref = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  height: 100%;
-  width: 100%;
 `;
