@@ -97,3 +97,14 @@ export const getNotes = createSelector(
   [audioSelector],
   state => state.notes
 );
+
+export const getNotesForSelectedTrack = createSelector(
+  audioSelector,
+  state => {
+    const notes: Types.note[] = state.notes;
+    const selectedTrack: string = state.selectedTrack;
+    const sortedNotes: Types.note[] = notes.filter(note => note.trackId === selectedTrack);
+
+    return sortedNotes;
+  }
+);
