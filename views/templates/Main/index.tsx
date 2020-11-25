@@ -6,11 +6,11 @@ import {
   ToolBar,
   Padding8px,
   ResizeContainer,
-  ContentWrapper,
   Tracks,
   MasterVolKnob,
 } from './components';
-import { Notes } from './Notes';
+import { ContentWrapper } from './ContentWrapper';
+import { BottomContent } from './BottomContent';
 
 export const Main: React.FC = () => {
   return (
@@ -27,11 +27,7 @@ export const Main: React.FC = () => {
                 <MasterVolKnob />
               </ContentWrapper>
             }
-            bottomComponent={
-              <ContentWrapper>
-                <Notes />
-              </ContentWrapper>
-            }
+            bottomComponent={<BottomContent />}
           />
         </Padding8px>
       </GridContainer>
