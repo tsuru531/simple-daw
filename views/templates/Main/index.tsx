@@ -9,8 +9,8 @@ import {
   ContentWrapper,
   Tracks,
   MasterVolKnob,
-  Notes,
 } from './components';
+import { Notes } from './Notes';
 
 export const Main: React.FC = () => {
   return (
