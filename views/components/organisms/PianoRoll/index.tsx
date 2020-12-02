@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { getNotesForSelectedTrack, Types } from '../../../../redux/audio';
 
-export const Notes: React.FC = () => {
+export const PianoRoll: React.FC = () => {
   const selecter = useSelector((state: Types.state) => state);
   const notes: Types.note[] = getNotesForSelectedTrack(selecter);
   const noteHeight: number = 10;

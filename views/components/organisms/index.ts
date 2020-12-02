@@ -1,2 +1,2 @@
 export { ToolBar } from './ToolBar';
-export { Notes } from './Notes';
+export { PianoRoll } from './PianoRoll';
