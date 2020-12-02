@@ -1,33 +1,31 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import { getNotesForSelectedTrack, Types } from '../../../../redux/audio';
+import { Notes } from './Notes';
 
 export const PianoRoll: React.FC = () => {
-  const selecter = useSelector((state: Types.state) => state);
-  const notes: Types.note[] = getNotesForSelectedTrack(selecter);
-  const noteHeight: number = 10;
-  const noteWidth: number = 20;
+  const noteSize: number = 20;
   const beatsPerBar: number = 4;
   const numberOfBar: number = 4;
-  const rollHeight: number = noteHeight * 127;
-  const rollWidth: number = noteWidth * beatsPerBar * numberOfBar;
+  const rollHeight: number = noteSize * 127;
+  const rollWidth: number = noteSize * beatsPerBar * numberOfBar;
 
   const lineLists = [];
   for (let i = 0; i < (beatsPerBar * numberOfBar + 1); i++) {
     lineLists.push({
-      x1: 20 * i,
+      x1: noteSize * i,
       y1: 0,
-      x2: 20 * i,
+      x2: noteSize * i,
       y2: rollHeight,
+      key: `column${i}`,
     });
   };
   for (let i = 0; i < 127 + 1; i++) {
     lineLists.push({
       x1: 0,
-      y1: 10 * i,
+      y1: noteSize * i,
       x2: rollWidth,
-      y2: 10 * i,
+      y2: noteSize * i,
+      key: `row${i}`,
     });
   };
 
@@ -49,24 +47,12 @@ export const PianoRoll: React.FC = () => {
                 y2={item.y2}
                 stroke="black"
                 strokeWidth="1"
+                key={item.key}
               />
             )
           })}
         </g>
-        <g>
-          {notes.map(note => {
-            return (
-              <rect
-                key={note.id}
-                x={note.startTime * noteWidth}
-                y={rollHeight - note.keyNum * noteHeight}
-                width={note.length * noteWidth}
-                height={noteHeight}
-                fill="yellow"
-              />
-            )
-          })}
-        </g>
+        <Notes noteSize={noteSize} />
       </svg>
     </Container>
   );
