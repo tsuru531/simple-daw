@@ -1,11 +1,11 @@
 import * as React from 'react';
 
 type props = {
-  d: string
-}
+  d: string,
+};
 
 export const Paint: React.FC<props> = ({ d }) => {
   return (
-    <path fill="yellow" d={d}/>
+    <path fill="yellow" stroke="black" d={d}/>
   );
 };
