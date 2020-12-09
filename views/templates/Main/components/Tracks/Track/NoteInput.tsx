@@ -10,17 +10,17 @@ type props = {
 export const NoteInput: React.FC<props> = ({ trackId }) => {
   const dispatch = useDispatch();
 
-  const [keyNum, setKeyNum] = useState<number>();
+  const [keyNum, setKeyNum] = useState<number>(60);
   const onChangeKeyNum = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const value: number = Number(e.target.value);
     setKeyNum(value);
   };
-  const [startTime, setStartTime] = useState<number>();
+  const [startTime, setStartTime] = useState<number>(0);
   const onChangeStartTime = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const value: number = Number(e.target.value);
     setStartTime(value);
   };
-  const [length, setLength] = useState<number>();
+  const [length, setLength] = useState<number>(1);
   const onChangeLength = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const value: number = Number(e.target.value);
     setLength(value);
