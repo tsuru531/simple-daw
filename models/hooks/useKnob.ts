@@ -1,68 +1,22 @@
-import {useState, useEffect, useRef} from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useMouseHover, useMouseActive } from '../hooks';
+import { judgeGrabCursor } from '../judgeGrabCursor';
 
 export const useKnob = (
   value: number,
   setValue: (value: number) => void,
   step: number
 ) => {
-  const [isHover, setHoverState] = useState(false);
-  const [isActive, setActiveState] = useState(false);
   const [Y, setY] = useState(null);
   const [currentY, setCurrentY] = useState(null);
   const knobRef = useRef<HTMLDivElement>(null);
   const valueRef = useRef(value);
+  const isHover = useMouseHover(knobRef);
+  const isActive = useMouseActive(knobRef);
 
   useEffect(() => {
     valueRef.current = value;
   });
-
-  useEffect(() => {
-    const mouseOver = (): void => {
-      setHoverState(true);
-    };
-    if (!isHover) {
-      knobRef.current.addEventListener('mouseover', mouseOver);
-    };
-    return () => {
-      knobRef.current.removeEventListener('mouseover', mouseOver);
-    };
-  }, [isHover]);
-
-  useEffect(() => {
-    const mouseOut = (): void => {
-      setHoverState(false);
-    };
-    if (isHover) {
-      knobRef.current.addEventListener('mouseout', mouseOut);
-    };
-    return () => {
-      knobRef.current.removeEventListener('mouseout', mouseOut);
-    };
-  }, [isHover]);
-
-  useEffect(() => {
-    const mouseDown = (): void => {
-      setActiveState(true);
-    };
-    if (isHover && !isActive) {
-      knobRef.current.addEventListener('mousedown', mouseDown);
-    };
-    return () => {
-      knobRef.current.removeEventListener('mousedown', mouseDown);
-    };
-  }, [isHover, isActive]);
-
-  useEffect(() => {
-    const mouseUp = (): void => {
-      setActiveState(false);
-    };
-    if (isActive) {
-      window.addEventListener('mouseup', mouseUp);
-    };
-    return () => {
-      window.removeEventListener('mouseup', mouseUp);
-    };
-  }, [isActive]);
 
   useEffect(() => {
     const mouseMove = (e: MouseEvent): void => {
@@ -87,15 +41,9 @@ export const useKnob = (
   }, [currentY]);
 
   useEffect(() => {
-    if (isHover && !isActive) {
-      document.body.style.cursor = 'grab';
-    };
-    if (!isHover && !isActive) {
-      document.body.style.cursor = 'auto';
-    };
-    if (isActive) {
-      document.body.style.cursor = 'grabbing';
-    };
+    const cursor = judgeGrabCursor(isHover, isActive);
+
+    document.body.style.cursor = cursor;
   }, [isHover, isActive]);
 
   return knobRef;
