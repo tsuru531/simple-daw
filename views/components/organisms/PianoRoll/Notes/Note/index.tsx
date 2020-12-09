@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Types } from 'src/redux/audio';
-import { Paint } from './Paint';
-import { MountDelete } from './MountDelete';
+import { Body } from './Body';
 
 type props = {
   note: Types.note,
@@ -16,8 +15,7 @@ export const Note: React.FC<props> = ({ note, noteSize }) => {
 
   return (
     <g transform={`matrix(1, 0, 0, 1, ${x}, ${y})`}>
-      <Paint d={d} />
-      <MountDelete d={d} noteId={note.id} />
+      <Body d={d} noteId={note.id} />
     </g>
   );
 };
