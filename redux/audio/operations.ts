@@ -185,6 +185,16 @@ export const addNote = (noteState: Types.noteState) => {
   };
 };
 
+export const updateNote = (newNote: Types.note) => {
+  return (dispatch, getState) => {
+    const selector: Types.state = getState();
+    const notes: Types.note[] = Selectors.getNotes(selector);
+    const newNotes: Types.note[] = notes.map(note => (note.id === newNote.id) ? newNote : note);
+
+    dispatch(Actions.setNotes(newNotes));
+  };
+};
+
 export const deleteNote = (id: string) => {
   return (dispatch, getState) => {
     const selector: Types.state = getState();
