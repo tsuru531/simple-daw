@@ -1,20 +1,17 @@
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
-import { deleteNote } from '../../../../../../redux/audio';
 
 type props = {
   d: string,
-  noteId: string
+  refObject: React.RefObject<SVGPathElement>
 };
 
-export const Body: React.FC<props> = ({ d, noteId }) => {
-  const dispatch = useDispatch();
-
+export const Body: React.FC<props> = ({ d, refObject }) => {
   return (
     <path
       fill="yellow"
       stroke="black"
       d={d}
-      onDoubleClick={() => {dispatch(deleteNote(noteId))}}/>
+      ref={refObject}
+    />
   );
 };
