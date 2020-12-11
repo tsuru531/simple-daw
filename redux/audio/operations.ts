@@ -179,9 +179,9 @@ export const addNote = (noteState: Types.noteState) => {
       length: noteState.length,
       trackId: noteState.trackId,
     };
+    const newNotes: Types.note[] = [...notes, note];
 
-    notes.push(note);
-    dispatch(Actions.setNotes(notes));
+    dispatch(Actions.setNotes(newNotes));
   };
 };
 
