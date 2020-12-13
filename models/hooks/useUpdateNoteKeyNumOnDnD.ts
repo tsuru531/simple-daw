@@ -1,38 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateNote, Types } from '../../redux/audio';
-import { cursorPosition } from '../../models';
-import { useMouseHover, useMouseActive } from '../hooks';
+import { cursorPosition } from '..';
+import { useMouseActive, useClickPosition } from '.';
 
-type position = {
-  x: number,
-  y: number
-};
-
-export const useUpdateKeyNumOnDnD = (refObject: React.RefObject<SVGPathElement>, note: Types.note): void => {
+export const useUpdateNoteKeyNumOnDnD = (refObject: React.RefObject<SVGPathElement>, note: Types.note): void => {
   const dispatch = useDispatch();
-  const [clickPosition, setClickPosition] = useState<position>(null);
   const [oldKeyNum, setOldKeyNum] = useState<number>(null);
   const [keyNumFluctuation, setKyeNumFluctuation] = useState<number>(null);
-  const isHover = useMouseHover(refObject);
   const isActive = useMouseActive(refObject);
+  const clickPosition = useClickPosition(refObject);
   const noteSize: number = 20;
-
-  useEffect(() => {
-    const onMouseDown = (e: MouseEvent) => {
-      setClickPosition({
-        x: e.clientX,
-        y: e.clientY
-      });
-    };
-
-    if (isHover) window.addEventListener('mousedown', onMouseDown);
-
-    return () => {
-      window.removeEventListener('mousedown', onMouseDown);
-    };
-
-  }, [isHover]);
 
   useEffect(() => {
     const onMouseMove = (e: MouseEvent) => {
