@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 
-type element = HTMLElement | SVGPathElement
-
-export const useMouseActive = (refObject: React.MutableRefObject<element>): boolean => {
+export const useMouseActive = <T extends EventTarget>(refObject: React.MutableRefObject<T>): boolean => {
   const [isActive, setState] = useState<boolean>(false);
 
   useEffect(() => {
