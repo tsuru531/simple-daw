@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { updateNote, Types } from '../../redux/audio';
-import { cursorPosition } from '..';
-import { useMouseActive, useClickPosition } from '.';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateNote, getNoteSize, Types } from '../../redux/audio';
+import { cursorPosition } from '../../models';
+import { useMouseActive, useClickPosition } from '../hooks';
 
 export const useUpdateNoteKeyNumOnDnD = (refObject: React.RefObject<SVGPathElement>, note: Types.note): void => {
   const dispatch = useDispatch();
+  const selector = useSelector((state: Types.state) => state);
   const [oldKeyNum, setOldKeyNum] = useState<number>(null);
   const [keyNumFluctuation, setKyeNumFluctuation] = useState<number>(null);
   const isActive = useMouseActive(refObject);
   const clickPosition = useClickPosition(refObject);
-  const noteSize: number = 20;
+  const noteSize: number = getNoteSize(selector);
 
   useEffect(() => {
     const onMouseMove = (e: MouseEvent) => {

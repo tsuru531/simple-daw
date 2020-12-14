@@ -1,9 +1,12 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { getNoteSize, Types } from '../../../../redux/audio';
 import { Notes } from './Notes';
 
 export const PianoRoll: React.FC = () => {
-  const noteSize: number = 20;
+  const selector: Types.state = useSelector((state: Types.state) => state);
+  const noteSize: number = getNoteSize(selector);
   const beatsPerBar: number = 4;
   const numberOfBar: number = 4;
   const rollHeight: number = noteSize * 127;
@@ -52,7 +55,7 @@ export const PianoRoll: React.FC = () => {
             )
           })}
         </g>
-        <Notes noteSize={noteSize} />
+        <Notes />
       </svg>
     </Container>
   );
