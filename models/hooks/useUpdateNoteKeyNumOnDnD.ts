@@ -4,7 +4,7 @@ import { updateNote, getNoteSize, Types } from '../../redux/audio';
 import { cursorPosition } from '../../models';
 import { useMouseActive, useClickPosition } from '../hooks';
 
-export const useUpdateNoteKeyNumOnDnD = (refObject: React.RefObject<SVGPathElement>, note: Types.note): void => {
+export const useUpdateNoteKeyNumOnDnD = <T extends EventTarget>(refObject: React.RefObject<T>, note: Types.note): void => {
   const dispatch = useDispatch();
   const selector = useSelector((state: Types.state) => state);
   const [oldKeyNum, setOldKeyNum] = useState<number>(null);
@@ -43,6 +43,5 @@ export const useUpdateNoteKeyNumOnDnD = (refObject: React.RefObject<SVGPathEleme
 
       dispatch(updateNote(newNote));
     };
-
   }, [keyNumFluctuation]);
 };
