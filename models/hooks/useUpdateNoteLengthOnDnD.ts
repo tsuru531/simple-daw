@@ -37,12 +37,15 @@ export const useUpdateNoteLengthOnDnD = <T extends EventTarget>(refObject: React
   useEffect(() => {
     if (lengthFluctuation !== null) {
       const newLength: number = oldLength + lengthFluctuation;
-      const newNote: Types.note = {
-        ...note,
-        length: newLength
-      };
 
-      dispatch(updateNote(newNote));
+      if (newLength > 0) {
+        const newNote: Types.note = {
+          ...note,
+          length: newLength
+        };
+
+        dispatch(updateNote(newNote));
+      };
     };
   }, [lengthFluctuation]);
 };
