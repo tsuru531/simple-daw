@@ -2,7 +2,8 @@ import { useRef } from 'react';
 import {
   useDeleteNoteOnDblClick,
   useUpdateNoteKeyNumOnDnD,
-  useUpdateNoteStartTimeOnDnD
+  useUpdateNoteStartTimeOnDnD,
+  useUpdateNoteLengthOnDnD
 } from '../hooks';
 import { Types } from '../../redux/audio';
 
@@ -25,6 +26,7 @@ export const useNote = (note: Types.note): noteRefs => {
   useDeleteNoteOnDblClick(noteRefs.body, note.id);
   useUpdateNoteKeyNumOnDnD(noteRefs.body, note);
   useUpdateNoteStartTimeOnDnD(noteRefs.body, note);
+  useUpdateNoteLengthOnDnD(noteRefs.right, note);
 
   return noteRefs;
 };
