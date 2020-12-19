@@ -6,4 +6,5 @@ export { useDeleteNoteOnDblClick } from './useDeleteNoteOnDblClick';
 export { useUpdateNoteKeyNumOnDnD } from './useUpdateNoteKeyNumOnDnD';
 export { useUpdateNoteStartTimeOnDnD } from './useUpdateNoteStartTimeOnDnD';
 export { useUpdateNoteLengthOnDnD } from './useUpdateNoteLengthOnDnD';
+export { useUpdateNoteStartTimeAndLengthOnDnD } from './useUpdateNoteStartTimeAndLengthOnDnD';
 export { useNote } from './useNote';
