@@ -189,7 +189,13 @@ export const updateNote = (newNote: Types.note) => {
   return (dispatch, getState) => {
     const selector: Types.state = getState();
     const notes: Types.note[] = Selectors.getNotes(selector);
-    const newNotes: Types.note[] = notes.map(note => (note.id === newNote.id) ? newNote : note);
+    const newNotes: Types.note[] = notes.map(note => {
+      if (note.id === newNote.id) {
+        if (newNote.length <= 0) newNote.length = note.length;
+        return newNote;
+      };
+      return note;
+    });
 
     dispatch(Actions.setNotes(newNotes));
   };
