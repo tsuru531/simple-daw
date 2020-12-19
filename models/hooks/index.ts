@@ -5,3 +5,4 @@ export { useDeleteNoteOnDblClick } from './useDeleteNoteOnDblClick';
 export { useUpdateNoteKeyNumOnDnD } from './useUpdateNoteKeyNumOnDnD';
 export { useUpdateNoteStartTimeOnDnD } from './useUpdateNoteStartTimeOnDnD';
 export { useClickPosition } from './useClickPosition';
+export { useNote } from './useNote';
