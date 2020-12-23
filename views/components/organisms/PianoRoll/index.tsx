@@ -1,12 +1,14 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import { getNoteSize, Types } from '../../../../redux/audio';
+import { useSelector, useDispatch } from 'react-redux';
+import { getNoteSize, getSelectedTrack, addNote, Types } from '../../../../redux/audio';
 import { Notes } from './Notes';
 
 export const PianoRoll: React.FC = () => {
   const selector: Types.state = useSelector((state: Types.state) => state);
+  const dispatch = useDispatch();
   const noteSize: number = getNoteSize(selector);
+  const selectedTrackId: string = getSelectedTrack(selector);
   const beatsPerBar: number = 4;
   const numberOfBar: number = 4;
   const rollHeight: number = noteSize * 127;
@@ -32,6 +34,21 @@ export const PianoRoll: React.FC = () => {
     });
   };
 
+  const onDoubleClick = (e: React.MouseEvent<SVGElement, MouseEvent>) => {
+    const svgElement = e.currentTarget;
+    const clientRect = svgElement.getBoundingClientRect();
+    const x = Math.round(e.clientX - clientRect.left);
+    const y = Math.round(e.clientY - clientRect.bottom);
+
+    const note: Types.noteState = {
+      keyNum: Math.floor(-y / noteSize) + 1,
+      startTime: Math.floor(x / noteSize),
+      length: 1,
+      trackId: selectedTrackId
+    };
+    dispatch(addNote(note));
+  };
+
   return (
     <Container>
       <svg
@@ -39,6 +56,7 @@ export const PianoRoll: React.FC = () => {
         height={rollHeight}
         viewBox={`0, 0, ${rollWidth}, ${rollHeight}`}
         xmlns="http://www.w3.org/2000/svg"
+        onDoubleClick={onDoubleClick}
       >
         <g>
           {lineLists.map(item => {
