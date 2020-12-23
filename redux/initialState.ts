@@ -4,7 +4,7 @@ export const initialState = {
     masterVol: 1,
     masterLevel: 0,
     bpm: 120,
-    selectedTrack: "",
+    selectedTrack: "1",
     noteSize: 20,
     tracks: [
       {id: "1", vol: 0.1, type: "sawtooth"},
