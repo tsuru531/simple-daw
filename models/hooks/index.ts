@@ -8,4 +8,5 @@ export { useUpdateNoteStartTimeOnDnD } from './useUpdateNoteStartTimeOnDnD';
 export { useUpdateNoteLengthOnDnD } from './useUpdateNoteLengthOnDnD';
 export { useUpdateNoteStartTimeAndLengthOnDnD } from './useUpdateNoteStartTimeAndLengthOnDnD';
 export { useEWResizeCursor } from './useEWResizeCursor';
+export { useMoveCursor } from './useMoveCursor';
 export { useNote } from './useNote';
