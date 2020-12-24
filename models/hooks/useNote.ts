@@ -4,7 +4,9 @@ import {
   useUpdateNoteKeyNumOnDnD,
   useUpdateNoteStartTimeOnDnD,
   useUpdateNoteLengthOnDnD,
-  useUpdateNoteStartTimeAndLengthOnDnD
+  useUpdateNoteStartTimeAndLengthOnDnD,
+  useMoveCursor,
+  useEWResizeCursor,
 } from '../hooks';
 import { Types } from '../../redux/audio';
 
@@ -27,8 +29,11 @@ export const useNote = (note: Types.note): noteRefs => {
   useDeleteNoteOnDblClick(noteRefs.body, note.id);
   useUpdateNoteKeyNumOnDnD(noteRefs.body, note);
   useUpdateNoteStartTimeOnDnD(noteRefs.body, note);
+  useMoveCursor(noteRefs.body);
   useUpdateNoteLengthOnDnD(noteRefs.right, note);
+  useEWResizeCursor(noteRefs.left);
   useUpdateNoteStartTimeAndLengthOnDnD(noteRefs.left, note);
+  useEWResizeCursor(noteRefs.right);
 
   return noteRefs;
 };
