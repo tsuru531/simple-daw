@@ -11,7 +11,6 @@ type props = {
 export const Track: React.FC<props> = ({ trackId }) => {
   return (
     <TrackWrapper trackId={trackId}>
-      id: {trackId}
       <TypeInput id={trackId} />
       <TrackVolKnob trackId={trackId} />
       <DeleteButton id={trackId} />
