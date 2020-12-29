@@ -5,4 +5,8 @@ export const TracksWrapper = styled.div`
   height: 300px;
   width: 100%;
   background-color: #767676;
+
+  & li + li {
+    border-top: solid 2px #777777;
+  }
 `;

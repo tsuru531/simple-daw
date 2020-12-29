@@ -25,6 +25,6 @@ export const TrackWrapper: React.FC<props> = ({ trackId, children }) => {
 
 const Wrapper = styled.div<{isSelected: boolean}>`
   ${({isSelected}) => isSelected?
-    "background-color: #515151;":
-    "background-color: #767676;"}
+    "background-color: #AAAAAA;":
+    "background-color: #888888;"}
 `;
