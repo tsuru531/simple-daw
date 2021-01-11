@@ -19,4 +19,12 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
+
+  button {
+    padding: 0;
+    background: none;
+    border: none;
+    outline: none;
+    appearance: none;
+  }
 `;
