@@ -6,7 +6,7 @@ type props = {
   id: string
 };
 
-export const DeleteButton: React.FC<props> = ({ id }) => {
+export const ButtonDeleteTrack: React.FC<props> = ({ id }) => {
   const dispatch = useDispatch();
 
   return (
