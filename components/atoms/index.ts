@@ -5,3 +5,4 @@ export { GridContainer } from './GridContainer';
 export { ToolContainer } from './ToolContainer';
 export { Padding8px } from './Padding8px';
 export { ButtonRed } from './ButtonRed';
+export { IconBucket } from './IconBucket';
