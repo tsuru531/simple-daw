@@ -1,17 +1,15 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteTrack } from '../../../redux/audio';
+import { ButtonDelete } from '../../molecules'
 
 type props = {
-  id: string
+  trackId: string
 };
 
-export const ButtonDeleteTrack: React.FC<props> = ({ id }) => {
+export const ButtonDeleteTrack: React.FC<props> = React.memo(({ trackId }) => {
   const dispatch = useDispatch();
+  const onClick = () => dispatch(deleteTrack(trackId));
 
-  return (
-    <button onClick={() => dispatch(deleteTrack(id))}>
-      delete
-    </button>
-  );
-};
+  return <ButtonDelete onClick={onClick} />;
+});

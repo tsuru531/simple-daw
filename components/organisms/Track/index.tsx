@@ -13,7 +13,7 @@ export const Track: React.FC<props> = ({ trackId }) => {
     <TrackWrapper trackId={trackId}>
       <TypeInput id={trackId} />
       <TrackVolKnob trackId={trackId} />
-      <ButtonDeleteTrack id={trackId} />
+      <ButtonDeleteTrack trackId={trackId} />
     </TrackWrapper>
   );
 };
