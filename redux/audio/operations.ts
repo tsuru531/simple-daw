@@ -113,8 +113,13 @@ export const setBpm = (value: number) => {
 };
 
 export const setSelectedTrack = (trackId: string) => {
-  return (dispatch) => {
-    dispatch(Actions.setSelectedTrack(trackId));
+  return (dispatch, getState) => {
+    const selector: Types.state = getState();
+    const tracks: Types.track[] = Selectors.getTracks(selector);
+    const isThere: boolean = tracks.filter(track => track.id === trackId).length !== 0;
+    const id: string = isThere ? trackId : "";
+
+    dispatch(Actions.setSelectedTrack(id));
   };
 };
 
