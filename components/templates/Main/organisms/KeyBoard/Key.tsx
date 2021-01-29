@@ -25,6 +25,9 @@ const FlexContainer = styled.div`
 const Scale = styled.div`
   height: 100%;
   padding: 0 4px;
+  font-size: 12px;
+  font-weight: bold;
+  overflow: hidden;
   display: flex;
   justify-content: flex-start;
   align-items: center;
