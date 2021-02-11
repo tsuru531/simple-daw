@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
-import { getNotesForSelectedTrack, Types } from '../../../../../../redux/audio';
+import { getNotesForSelectedTrack, Types } from '../../../../../redux/audio';
 import { Note } from './Note';
 
 export const Notes: React.FC = () => {

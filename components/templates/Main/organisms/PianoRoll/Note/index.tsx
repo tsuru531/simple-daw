@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
-import { getNoteSize, Types } from '../../../../../../../redux/audio';
-import { useNote } from '../../../../../../../models/hooks';
+import { getNoteSize, Types } from '../../../../../../redux/audio';
+import { useNote } from '../../../../../../models/hooks';
 import { Body } from './Body';
 import { Right } from './Right';
 import { Left } from './Left';
