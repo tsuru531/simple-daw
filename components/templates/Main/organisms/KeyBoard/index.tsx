@@ -9,7 +9,7 @@ type key = {
 
 export const KeyBoard: React.FC = React.memo(() => {
   const keys: key[] = [];
-  for (let i = 127; i >= 0; i--) {
+  for (let i = 127; i > 0; i--) {
     const noteNumToScale = (noteNum: number): string => {
       const scaleList: string[] = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
       const remainder: number = noteNum % 12;
@@ -44,6 +44,7 @@ export const KeyBoard: React.FC = React.memo(() => {
 
 const FlexContainer = styled.div`
   height: 100%;
+  width: 100%;
   border: solid 1px black;
   display: flex;
   flex-direction: column;
