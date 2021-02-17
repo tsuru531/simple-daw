@@ -28,9 +28,8 @@ const FlexItem = styled.div`
 
   & + &:before {
     content: '';
-    border-top: solid 1px black;
+    border-top: solid 1px rgba(0, 0, 0, .1);
     position: absolute;
     width: 100%;
-    margin-top: -1px;
   }
 `;
