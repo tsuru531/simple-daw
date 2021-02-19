@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { useNote, noteRefs } from '../../../../../models/hooks/useNote';
 import { Types } from '../../../../../redux/audio';
 
 type props = {
@@ -11,10 +12,12 @@ const beatsPerBar: number = 4;
 const bar: number = 2;
 
 export const Note: React.FC<props> = React.memo(({...props}) => {
+  const noteRefs: noteRefs = useNote(props.note);
+
   return (
     <FlexContainer note={props.note}>
       <End />
-      <Body />
+      <Body ref={noteRefs.body as React.RefObject<HTMLDivElement>} />
       <End />
     </FlexContainer>
   );
