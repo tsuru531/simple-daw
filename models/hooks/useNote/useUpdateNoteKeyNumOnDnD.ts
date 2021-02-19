@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateNote, getNoteSize, Types } from '../../redux/audio';
-import { cursorPosition } from '../../models';
-import { useMouseActive, useClickPosition } from '../hooks';
+import { updateNote, getNoteSize, Types } from '../../../redux/audio';
+import { cursorPosition } from '../../../models';
+import { useMouseActive, useClickPosition } from '../../hooks';
 
 export const useUpdateNoteKeyNumOnDnD = <T extends EventTarget>(refObject: React.RefObject<T>, note: Types.note): void => {
   const dispatch = useDispatch();

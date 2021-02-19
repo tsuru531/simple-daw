@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateNote, getNoteSize, Types } from '../../redux/audio';
-import { cursorPosition } from '../../models';
-import { useClickPosition, useMouseActive } from '../hooks';
+import { updateNote, getNoteSize, Types } from '../../../redux/audio';
+import { cursorPosition } from '../../../models';
+import { useClickPosition, useMouseActive } from '../../hooks';
 
 type values = {
   startTime: number,
