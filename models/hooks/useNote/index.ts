@@ -20,6 +20,7 @@ export const useNote = (note: Types.note): noteRefs => {
   };
 
   useDeleteNoteOnDblClick(noteRefs.body, note);
+  useUpdateKeyNumOnDnD(noteRefs.body, note);
   
 
   return noteRefs;
