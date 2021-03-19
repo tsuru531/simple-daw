@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateNote, Types } from '../../../redux/audio';
+import { useDnD } from './useDnD';
 
 export const useUpdateKeyNumOnDnD = (refObject: React.RefObject<HTMLDivElement>, note: Types.note): void => {
   const dispatch = useDispatch();
@@ -11,36 +12,16 @@ export const useUpdateKeyNumOnDnD = (refObject: React.RefObject<HTMLDivElement>,
   const [fluctuation, setFluctuation] = useState<number>(null);
   const renderRef = useRef<boolean>(false);
 
-  useEffect(() => {
-    const target = refObject.current;
+  const mouseDown = (e: MouseEvent) => {
+    setClickYPosition(e.clientY);
+    setTargetHeight(refObject.current.getBoundingClientRect().height);
+  };
+  const mouseMove = (e: MouseEvent) => {
+    setCursorYPosition(e.clientY);
+  };
+  const mouseUp = () => {};
 
-    const onMouseDown = (e: MouseEvent): void => {
-      window.addEventListener('mousemove', windowMouseMove);
-      window.addEventListener('mouseup', windowMouseUp);
-      target.removeEventListener('mousedown', onMouseDown);
-
-      setClickYPosition(e.clientY);
-      setTargetHeight(target.getBoundingClientRect().height);
-    };
-
-    const windowMouseMove = (e: MouseEvent): void => {
-      setCursorYPosition(e.clientY);
-    };
-
-    const windowMouseUp = (): void => {
-      target.addEventListener('mousedown', onMouseDown);
-      window.removeEventListener('mousemove', windowMouseMove);
-      window.removeEventListener('mouseup', windowMouseUp);
-    };
-
-    target.addEventListener('mousedown', onMouseDown);
-
-    return () => {
-      target.removeEventListener('mousedown', onMouseDown);
-      window.removeEventListener('mousemove', windowMouseMove);
-      window.removeEventListener('mouseup', windowMouseUp);
-    };
-  }, []);
+  useDnD(refObject, mouseDown, mouseMove, mouseUp);
 
   useEffect(() => {
     setOldKeyNum(note.keyNum);
