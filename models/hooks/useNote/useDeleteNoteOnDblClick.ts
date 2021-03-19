@@ -1,18 +1,18 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteNote } from '../../../redux/audio';
+import { deleteNote, Types } from '../../../redux/audio';
 
-export const useDeleteNoteOnDblClick = (refObject: React.RefObject<EventTarget>, noteId: string): void => {
+export const useDeleteNoteOnDblClick = (refObject: React.RefObject<HTMLDivElement>, note: Types.note): void => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const note: EventTarget = refObject.current;
-    const onDblClick = () => dispatch(deleteNote(noteId));
+    const target: HTMLDivElement = refObject.current;
+    const onDblClick = () => dispatch(deleteNote(note.id));
 
-    note.addEventListener('dblclick', onDblClick);
+    target.addEventListener('dblclick', onDblClick);
 
     return () => {
-      note.removeEventListener('dblclick', onDblClick);
+      target.removeEventListener('dblclick', onDblClick);
     };
-  });
+  }, []);
 };
