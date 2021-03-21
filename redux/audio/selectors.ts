@@ -43,6 +43,11 @@ export const getSecondsPerBeat = createSelector(
   }
 );
 
+export const getScaleCount = createSelector(
+  [audioSelector],
+  state => state.scaleCount
+);
+
 export const getSelectedTrack = createSelector(
   [audioSelector],
   state => state.selectedTrack
