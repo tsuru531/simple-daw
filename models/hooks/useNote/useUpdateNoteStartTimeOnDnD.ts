@@ -1,17 +1,16 @@
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { cursorPosition } from '../../../models';
 import { useMouseActive, useClickPosition } from '../../hooks';
-import { getNoteSize, updateNote, Types } from '../../../redux/audio';
+import { updateNote, Types } from '../../../redux/audio';
 
 export const useUpdateNoteStartTimeOnDnD = <T extends EventTarget>(refObject: React.RefObject<T>, note: Types.note) => {
   const dispatch = useDispatch();
-  const selector = useSelector((state: Types.state) => state);
   const [startTimeFluctuation, setStartTimeFluctuation] = useState<number>(null);
   const [oldStartTime, setOldStartTime] = useState<number>(null);
   const clickPosition = useClickPosition(refObject);
   const isActive = useMouseActive(refObject);
-  const noteSize: number = getNoteSize(selector);
+  const noteSize: number = 20;
   const step: number = 2;
 
   useEffect(() => {

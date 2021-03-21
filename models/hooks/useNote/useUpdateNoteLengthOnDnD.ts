@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateNote, getNoteSize, Types } from '../../../redux/audio';
+import { useDispatch } from 'react-redux';
+import { updateNote, Types } from '../../../redux/audio';
 import { cursorPosition } from '../../../models';
 import { useClickPosition, useMouseActive } from '../../hooks';
 
 export const useUpdateNoteLengthOnDnD = <T extends EventTarget>(refObject: React.RefObject<T>, note: Types.note) => {
   const dispatch = useDispatch();
-  const selector = useSelector((state: Types.state) => state);
   const [lengthFluctuation, setLengthFluctuation] = useState<number>(null);
   const [oldLength, setOldLength] = useState<number>(null);
-  const noteSize: number = getNoteSize(selector);
+  const noteSize: number = 20;
   const clickPosition = useClickPosition(refObject);
   const isActive = useMouseActive(refObject);
   const step: number = 2;
