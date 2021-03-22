@@ -4,6 +4,7 @@ export const initialState = {
     masterVol: 1,
     masterLevel: 0,
     bpm: 120,
+    beatsPerBar: 4,
     scaleCount: 127,
     selectedTrack: "1",
     tracks: [
