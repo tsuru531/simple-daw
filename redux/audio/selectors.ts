@@ -48,6 +48,11 @@ export const getBeatsPerBar = createSelector(
   state => state.beatsPerBar
 );
 
+export const getBar = createSelector(
+  [audioSelector],
+  state => state.bar
+);
+
 export const getScaleCount = createSelector(
   [audioSelector],
   state => state.scaleCount
