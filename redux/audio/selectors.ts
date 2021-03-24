@@ -53,6 +53,11 @@ export const getBar = createSelector(
   state => state.bar
 );
 
+export const getFluctuationValue = createSelector(
+  [audioSelector],
+  state => state.fluctuationValue
+);
+
 export const getScaleCount = createSelector(
   [audioSelector],
   state => state.scaleCount

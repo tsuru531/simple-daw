@@ -6,6 +6,7 @@ export const initialState = {
     bpm: 120,
     bar: 2,
     beatsPerBar: 4,
+    fluctuationValue: 4 / 8,
     scaleCount: 127,
     selectedTrack: "1",
     tracks: [
