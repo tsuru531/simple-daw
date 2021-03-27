@@ -1,10 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { useNote, noteRefs } from '../../../../../models/hooks/useNote';
+import { useNote } from '../../../../../models/hooks';
 import { Types } from '../../../../../redux/audio';
 
 type props = {
-  note: Types.note
+  note: Types.note,
+  notesRef: React.RefObject<HTMLDivElement>
 };
 
 const scaleCount: number = 127;
@@ -12,18 +13,20 @@ const beatsPerBar: number = 4;
 const bar: number = 2;
 
 export const Note: React.FC<props> = React.memo(({...props}) => {
-  const noteRefs: noteRefs = useNote(props.note);
+  const noteRefs = useNote(props.note, props.notesRef);
 
   return (
     <FlexContainer note={props.note}>
       <End />
-      <Body ref={noteRefs.body as React.RefObject<HTMLDivElement>} />
-      <End />
+      <Body ref={noteRefs.body} />
+      <End ref={noteRefs.right} />
     </FlexContainer>
   );
 });
 
-const FlexContainer = styled.div<props>`
+const FlexContainer = styled.div<{
+  note: Types.note
+}>`
   bottom: ${props => (100 / scaleCount) * props.note.keyNum}%;
   left: ${props => 100 / (beatsPerBar * bar) * props.note.startTime}%;
   width: ${props => (100 / (beatsPerBar * bar)) * props.note.length}%;

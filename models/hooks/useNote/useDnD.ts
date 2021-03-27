@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 export const useDnD = (
-  refObject: React.RefObject<HTMLDivElement>,
+  refObject: React.RefObject<EventTarget>,
   mouseDown: (e: MouseEvent) => void,
   mouseMove: (e: MouseEvent) => void,
   mouseUp: (e: MouseEvent) => void
@@ -13,7 +13,6 @@ export const useDnD = (
       window.addEventListener('mousemove', windowMouseMove);
       window.addEventListener('mouseup', windowMouseUp);
       target.removeEventListener('mousedown', onMouseDown);
-  
       mouseDown(e);
     };
   
@@ -25,7 +24,6 @@ export const useDnD = (
       target.addEventListener('mousedown', onMouseDown);
       window.removeEventListener('mousemove', windowMouseMove);
       window.removeEventListener('mouseup', windowMouseUp);
-
       mouseUp(e);
     };
   
