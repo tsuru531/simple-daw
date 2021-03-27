@@ -11,6 +11,7 @@ export const useUpdateLengthOnDnD = (
   note: Types.note
 ) => {  
   const [oldLength, setOldLength] = useState<number>(null);
+  const [isMouseDown, setMouseDown] = useState<boolean>(false);
   const [fluctuationValue, setFluctuationValue ] = useState<number>(null);
   const firstRender = useRef<boolean>(false);
   const dispatch  = useDispatch();
@@ -21,14 +22,22 @@ export const useUpdateLengthOnDnD = (
   
   const mouseDown = (e: MouseEvent) => {
     setPosition.down(e);
-    setOldLength(note.length);
+    setMouseDown(true);
   };
   const mouseMove = (e: MouseEvent) => {
     setPosition.cursor(e);
   };
-  const mouseUp = () => {};
+  const mouseUp = () => {
+    setMouseDown(false);
+  };
 
   useDnD(noteRef, mouseDown, mouseMove, mouseUp);
+
+  useEffect(() => {
+    if (!firstRender.current) return;
+    
+    setOldLength(note.length);
+  }, [isMouseDown]);
 
   useEffect(() => {
     if (!firstRender.current) return;
@@ -41,9 +50,11 @@ export const useUpdateLengthOnDnD = (
     if (!firstRender.current) return;
     if (fluctuationValue % fluctuationRange !== 0) return;
 
-    const newLength: number = oldLength + fluctuationValue;
+    let newLength: number = oldLength + fluctuationValue;
 
-    if (Math.sign(newLength) !== 1) return;
+    if (Math.sign(newLength) !== 1) {
+      newLength = fluctuationRange;
+    };
 
     const newNote: Types.note = {
       ...note,
