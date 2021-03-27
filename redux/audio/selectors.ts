@@ -53,9 +53,20 @@ export const getBar = createSelector(
   state => state.bar
 );
 
-export const getFluctuationValue = createSelector(
+export const getAllBeats = createSelector(
   [audioSelector],
-  state => state.fluctuationValue
+  state => {
+    const beatsPerBar: number = state.beatsPerBar;
+    const bar: number = state.bar;
+    const allBeats: number = beatsPerBar * bar;
+
+    return allBeats;
+  }
+);
+
+export const getFluctuationRange = createSelector(
+  [audioSelector],
+  state => state.fluctuationRange
 );
 
 export const getScaleCount = createSelector(
