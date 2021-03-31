@@ -5,6 +5,7 @@ import { useDeleteNoteOnDblClick } from './useDeleteNoteOnDblClick';
 import { useUpdateKeyNumOnDnD } from './useUpdateKeyNumOnDnD';
 import { useUpdateStartTimeOnDnD } from './useUpdateStartTimeOnDnD';
 import { useUpdateLengthOnDnD } from './useUpdateLengthOnDnD';
+import { useUpdateStartTimeAndLengthOnDnD } from './useUpdateStartTimeAndLengthOnDnD';
 
 export type noteRefs = {
   body: React.RefObject<HTMLDivElement>,
@@ -26,6 +27,7 @@ export const useNote = (note: Types.note, notesRef: React.RefObject<HTMLDivEleme
   useUpdateKeyNumOnDnD(noteRefs.body, note);
   useUpdateStartTimeOnDnD(noteRefs.body, note);
   useUpdateLengthOnDnD(noteRefs.right, notesRef, note);
+  useUpdateStartTimeAndLengthOnDnD(noteRefs.left, notesRef, note);
 
   return noteRefs;
 };

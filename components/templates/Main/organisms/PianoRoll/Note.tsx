@@ -17,7 +17,7 @@ export const Note: React.FC<props> = React.memo(({...props}) => {
 
   return (
     <FlexContainer note={props.note}>
-      <End />
+      <End ref={noteRefs.left} />
       <Body ref={noteRefs.body} />
       <End ref={noteRefs.right} />
     </FlexContainer>
