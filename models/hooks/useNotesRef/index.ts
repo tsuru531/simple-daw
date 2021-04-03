@@ -1,10 +1,11 @@
-import * as React from "react";
 import { useRef } from "react";
-
-type notesRef = React.MutableRefObject<HTMLDivElement>;
+import { notesRef } from "./types";
+import { useAddNoteOnDblClick } from "./useAddNoteOnDblClick";
 
 export const useNotesRef = (): notesRef => {
   const notesRef = useRef<HTMLDivElement>(null);
+
+  useAddNoteOnDblClick(notesRef);
 
   return notesRef;
 };

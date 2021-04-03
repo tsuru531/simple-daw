@@ -7,7 +7,10 @@ export const useDeleteNoteOnDblClick = (refObject: React.RefObject<HTMLDivElemen
 
   useEffect(() => {
     const target: HTMLDivElement = refObject.current;
-    const onDblClick = () => dispatch(deleteNote(note.id));
+    const onDblClick = (e) => {
+      e.stopPropagation();
+      dispatch(deleteNote(note.id))
+    };
 
     target.addEventListener('dblclick', onDblClick);
 
