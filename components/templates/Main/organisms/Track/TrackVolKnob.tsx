@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { getTrackVolPer, Types } from '../../../../../redux/audio';
-import { useTrackVolKnob } from '../../../../../models/hooks/useTrackVolKnob';
+import { useTrackVolKnob } from '../../../../../hooks/useTrackVolKnob';
 import { PrimaryKnob, MountRef } from '../../../../app/molecules/knob/PrimaryKnob';
 
 type props = {

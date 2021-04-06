@@ -1,15 +1,16 @@
 import * as React from "react";
 import { useState, useEffect, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { updateNote, getAllBeats, getFluctuationRange, Types } from "../../../redux/audio";
+import { updateNote, getAllBeats, getFluctuationRange, Types } from "../../redux/audio";
 import { useDnD } from "./useDnD";
 import { useMovingDistance } from "./useMovingDistance";
 
-export const useUpdateLengthOnDnD = (
+export const useUpdateStartTimeAndLengthOnDnD = (
   noteRef: React.RefObject<HTMLDivElement>,
   notesRef: React.RefObject<HTMLDivElement>,
   note: Types.note
-) => {  
+): void => {
+  const [oldStartTime, setOldStartTime] = useState<number>(null);
   const [oldLength, setOldLength] = useState<number>(null);
   const [isMouseDown, setMouseDown] = useState<boolean>(false);
   const [fluctuationValue, setFluctuationValue ] = useState<number>(null);
@@ -36,6 +37,7 @@ export const useUpdateLengthOnDnD = (
   useEffect(() => {
     if (!firstRender.current) return;
     
+    setOldStartTime(note.startTime);
     setOldLength(note.length);
   }, [isMouseDown]);
 
@@ -50,14 +52,17 @@ export const useUpdateLengthOnDnD = (
     if (!firstRender.current) return;
     if (fluctuationValue % fluctuationRange !== 0) return;
 
-    let newLength: number = oldLength + fluctuationValue;
+    let newStartTime: number = oldStartTime + fluctuationValue;
+    let newLength: number = oldLength - fluctuationValue;
 
     if (Math.sign(newLength) !== 1) {
+      newStartTime = oldStartTime + oldLength - fluctuationRange;
       newLength = fluctuationRange;
     };
 
     const newNote: Types.note = {
       ...note,
+      startTime: newStartTime,
       length: newLength
     };
 

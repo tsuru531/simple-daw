@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { getMasterVol, setMasterVol, Types } from '../../redux/audio';
+import { getMasterVol, setMasterVol, Types } from '../redux/audio';
 import { useKnob } from './useKnob';
 
 export const useMasterVolKnob = () => {

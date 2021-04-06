@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteNote, Types } from '../../../redux/audio';
+import { deleteNote, Types } from '../../redux/audio';
 
 export const useDeleteNoteOnDblClick = (refObject: React.RefObject<HTMLDivElement>, note: Types.note): void => {
   const dispatch = useDispatch();

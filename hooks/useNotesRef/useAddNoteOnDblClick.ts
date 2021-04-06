@@ -6,7 +6,7 @@ import {
   getScaleCount,
   getAllBeats,
   addNote
-} from "../../../redux/audio";
+} from "../../redux/audio";
 import { getClickPositionInElement } from "./getClickPositionInElement";
 import { notesRef, position } from "./types";
 

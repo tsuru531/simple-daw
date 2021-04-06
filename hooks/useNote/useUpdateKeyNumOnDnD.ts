@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { updateNote, Types } from '../../../redux/audio';
+import { updateNote, Types } from '../../redux/audio';
 import { useDnD } from './useDnD';
 
 export const useUpdateKeyNumOnDnD = (refObject: React.RefObject<HTMLDivElement>, note: Types.note): void => {

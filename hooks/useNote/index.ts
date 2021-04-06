@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useRef } from 'react';
-import { Types } from '../../../redux/audio';
+import { Types } from '../../redux/audio';
 import { useDeleteNoteOnDblClick } from './useDeleteNoteOnDblClick';
 import { useUpdateKeyNumOnDnD } from './useUpdateKeyNumOnDnD';
 import { useUpdateStartTimeOnDnD } from './useUpdateStartTimeOnDnD';

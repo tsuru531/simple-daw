@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useMouseHover, useMouseActive } from '../hooks';
-import { judgeGrabCursor } from '../judgeGrabCursor';
+import { judgeGrabCursor } from '../models/judgeGrabCursor';
 
 export const useKnob = (
   value: number,

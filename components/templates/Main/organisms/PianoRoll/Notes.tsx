@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { useNotesRef } from "../../../../../models/hooks"
+import { useNotesRef } from "../../../../../hooks"
 import { getNotesForSelectedTrack, Types } from '../../../../../redux/audio';
 import { Note } from './Note';
 

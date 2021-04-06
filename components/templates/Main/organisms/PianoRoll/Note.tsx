@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { useNote } from '../../../../../models/hooks';
+import { useNote } from '../../../../../hooks';
 import { Types } from '../../../../../redux/audio';
 
 type props = {

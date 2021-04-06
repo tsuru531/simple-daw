@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { getTrackVol, setTrackVol, Types } from '../../redux/audio';
+import { getTrackVol, setTrackVol, Types } from '../redux/audio';
 import { useKnob } from './useKnob';
 
 export const useTrackVolKnob = (id: string) => {

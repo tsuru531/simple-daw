@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { getMasterVolPer, Types } from '../../../../../redux/audio';
-import { useMasterVolKnob } from '../../../../../models/hooks/useMasterVolKnob';
+import { useMasterVolKnob } from '../../../../../hooks/useMasterVolKnob';
 import { PrimaryKnob, MountRef } from '../../../../app/molecules/knob/PrimaryKnob';
 
 export const MasterVolKnob: React.FC = () => {
