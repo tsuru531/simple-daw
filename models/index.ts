@@ -1,4 +1,4 @@
 export { createUniqueString } from './createUniqueString';
-export { toFrequency } from './toFrequency';
+export { convertKeyNumToFrequency } from './audio/convertKeyNumToFrequency';
 export { judgeGrabCursor } from './judgeGrabCursor';
 export { cursorPosition } from './cursorPosition';

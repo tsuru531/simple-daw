@@ -1,7 +1,8 @@
 import * as Actions from './actions';
 import * as Selectors from './selectors';
 import * as Types from './types';
-import { createUniqueString, toFrequency } from '../../models';
+import { convertKeyNumToFrequency } from "../../models/audio";
+import { createUniqueString } from '../../models';
 
 let audioContext,
     masterGain,
@@ -21,7 +22,7 @@ const playOsc = (selector: Types.state, noteState: Types.noteState) => {
   const seondsPerBeat = Selectors.getSecondsPerBeat(selector);
   const track: Types.track = Selectors.getTrack(selector, noteState.trackId);
   const type: Types.wave = track.type;
-  const frequency = toFrequency(noteState.keyNum);
+  const frequency = convertKeyNumToFrequency(noteState.keyNum);
   const osc = audioContext.createOscillator();
   const gain = audioContext.createGain();
 
