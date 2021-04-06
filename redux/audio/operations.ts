@@ -1,7 +1,7 @@
 import * as Actions from './actions';
 import * as Selectors from './selectors';
 import * as Types from './types';
-import { convertKeyNumToFrequency } from "../../models/audio";
+import { convertKeyNumToFrequency, convertToVolume } from "../../models/audio";
 import { createUniqueString } from '../../models';
 
 let audioContext,
@@ -55,18 +55,6 @@ export const play = () => {
           trackId: note.trackId
         }
         playOsc(selector, noteState);
-      };
-
-      const convertToVolume = (analyserNode, uint8Array) => {
-        analyserNode.getByteTimeDomainData(uint8Array);
-        const max = uint8Array.reduce((a, b) => {
-          return Math.max(a, b);
-        });
-        const min = uint8Array.reduce((a, b) => {
-          return Math.min(a, b);
-        });
-        const result = Math.max(Math.abs(128 - max), Math.abs(128 - min));
-        return result;
       };
 
       const data = new Uint8Array(256);
