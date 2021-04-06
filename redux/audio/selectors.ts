@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import * as Types from './types';
+import { convertKeyNumToFrequency } from "../../models/audio"
 
 const audioSelector = (state: Types.state) => state.audio;
 
@@ -128,6 +129,31 @@ export const getNotes = createSelector(
   [audioSelector],
   state => state.notes
 );
+
+export const getPlayFormatNote = (state, note: Types.note): Types.playFormat => {
+  return createSelector(
+    [audioSelector],
+    state => {
+      const tracks = state.tracks as Types.track[];
+      const track: Types.track = tracks.find(track => track.id === note.trackId);
+      const bpm = state.bpm;
+      const frequency: number = convertKeyNumToFrequency(note.keyNum);
+      const secondsPerBeat: number = 60 / bpm;
+      const startTime: number = note.startTime * secondsPerBeat;
+      const stopTime: number = (note.startTime + note.length) * secondsPerBeat;
+
+      const formatNote: Types.playFormat = {
+        gain: track.vol,
+        type: track.type,
+        frequency: frequency,
+        startTime: startTime,
+        stopTime: stopTime,
+      };
+      
+      return formatNote;
+    }
+  )(state);
+};
 
 export const getNotesForSelectedTrack = createSelector(
   audioSelector,

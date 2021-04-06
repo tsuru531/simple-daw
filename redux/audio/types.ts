@@ -1,12 +1,12 @@
 import { initialState } from '../initialState';
+import { playFormat, wave } from "../../models/audio/types";
+export { playFormat, wave };
 
 export type state = typeof initialState;
 
-export type wave = "sine" | "square" | "sawtooth" | "triangle";
-
 export type trackState = {
   vol: number,
-  type: wave
+  type: wave,
 };
 
 export type track = trackState & {

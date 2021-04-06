@@ -1,7 +1,7 @@
 import * as Actions from './actions';
 import * as Selectors from './selectors';
 import * as Types from './types';
-import { convertKeyNumToFrequency, convertToVolume } from "../../models/audio";
+import { convertToVolume } from "../../models/audio";
 import { createUniqueString } from '../../models';
 
 let audioContext,
@@ -18,20 +18,16 @@ const adjustVolume = (volume: number): number => {
   return volume;
 };
 
-const playOsc = (selector: Types.state, noteState: Types.noteState) => {
-  const seondsPerBeat = Selectors.getSecondsPerBeat(selector);
-  const track: Types.track = Selectors.getTrack(selector, noteState.trackId);
-  const type: Types.wave = track.type;
-  const frequency = convertKeyNumToFrequency(noteState.keyNum);
+const playOsc = (playFormat: Types.playFormat) => {
   const osc = audioContext.createOscillator();
   const gain = audioContext.createGain();
 
-  gain.gain.value = track.vol;
-  osc.type = type;
-  osc.frequency.value = frequency;
+  gain.gain.value = playFormat.gain;
+  osc.type = playFormat.type;
+  osc.frequency.value = playFormat.frequency;
   osc.connect(gain).connect(masterGain);
-  osc.start(noteState.startTime * seondsPerBeat);
-  osc.stop((noteState.startTime + noteState.length) * seondsPerBeat);
+  osc.start(playFormat.startTime);
+  osc.stop(playFormat.stopTime);
 };
 
 export const play = () => {
@@ -48,13 +44,9 @@ export const play = () => {
       masterGain.connect(audioContext.destination);
 
       for (let note of notes) {
-        const noteState: Types.noteState = {
-          keyNum: note.keyNum,
-          startTime: note.startTime,
-          length: note.length,
-          trackId: note.trackId
-        }
-        playOsc(selector, noteState);
+        const playFormatNote = Selectors.getPlayFormatNote(selector, note);
+
+        playOsc(playFormatNote);
       };
 
       const data = new Uint8Array(256);
