@@ -1,12 +1,11 @@
 import * as Actions from './actions';
 import * as Selectors from './selectors';
 import * as Types from './types';
-import { playOsc, convertToVolume } from "../../models/audio";
+import { playOsc, createMaster, convertToVolume } from "../../models/audio";
 import { createUniqueString } from '../../models';
 
-let audioContext,
-    masterGain,
-    masterLevelInterval;
+let audioContext;
+let masterLevelInterval;
 
 const adjustVolume = (volume: number): number => {
   if (volume > 1) volume = 1;
@@ -25,21 +24,18 @@ export const play = () => {
     if (isPlaying) return;
 
     audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
-    masterGain = audioContext.createGain();
-    masterGain.gain.value = masterVol;
-    masterGain.connect(audioContext.destination);
+
+    const master = createMaster(audioContext, masterVol);
 
     for (let note of notes) {
       const playFormatNote = Selectors.getPlayFormatNote(selector, note);
 
-      playOsc(audioContext, masterGain, playFormatNote);
+      playOsc(audioContext, master.gain, playFormatNote);
     };
 
     const data = new Uint8Array(256);
-    const masterAnalyser = audioContext.createAnalyser();
-    masterGain.connect(masterAnalyser).connect(audioContext.destination);
     masterLevelInterval = setInterval(() => {
-      const masterLevel = convertToVolume(masterAnalyser, data);
+      const masterLevel = convertToVolume(master.analyser, data);
       dispatch(Actions.setMasterLevel(masterLevel));
     }, 100);
 
@@ -163,7 +159,7 @@ export const updateNote = (newNote: Types.note) => {
 
         return newNote;
       };
-      
+
       return note;
     });
 
