@@ -1,18 +1,16 @@
 import * as Actions from './actions';
 import * as Selectors from './selectors';
 import * as Types from './types';
-import { playOsc, createMaster, convertToVolume } from "../../models/audio";
+import { 
+  playOsc,
+  createMaster, 
+  convertToVolume,
+  formatGain
+} from "../../models/audio";
 import { createUniqueString } from '../../models';
 
 let audioContext;
 let masterLevelInterval;
-
-const adjustVolume = (volume: number): number => {
-  if (volume > 1) volume = 1;
-  if (volume < 0) volume = 0;
-
-  return volume;
-};
 
 export const play = () => {
   return (dispatch, getState) => {
@@ -107,11 +105,11 @@ export const updateTrack = (newTrack: Types.track) => {
 export const setTrackVol = (id: string, volume: number) => {
   return (dispatch, getState) => {
     const selector: Types.state = getState();
-    const adjustedVolume = adjustVolume(volume);
+    const gain = formatGain(volume);
     const track: Types.track = Selectors.getTrack(selector, id);
     const newTrack: Types.track = {
       ...track,
-      vol: adjustedVolume
+      vol: gain
     };
 
     dispatch(updateTrack(newTrack));
