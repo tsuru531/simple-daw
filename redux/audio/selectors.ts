@@ -60,6 +60,15 @@ export const getSecondsPerBeat = createSelector(
   }
 );
 
+export const getBeatsPerSecond = createSelector(
+  [audioSelector],
+  state => {
+    const beatsPerSecond: number = state.bpm / 60;
+
+    return beatsPerSecond;
+  }
+); 
+
 export const getBeatsPerBar = createSelector(
   [audioSelector],
   state => state.beatsPerBar
