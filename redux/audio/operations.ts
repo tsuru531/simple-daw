@@ -11,11 +11,14 @@ import { createUniqueString } from '../../models';
 
 let audioContext;
 let masterLevelInterval;
+let setCurrentTimeInterval;
 
 export const play = () => {
   return (dispatch, getState) => {
     const selector: Types.state = getState();
     const isPlaying: boolean = Selectors.getIsPlaying(selector);
+    const beatsPerSecond: number = Selectors.getBeatsPerSecond(selector);
+    const allBeats: number = Selectors.getAllBeats(selector);
     const masterVol: number = Selectors.getMasterVol(selector);
     const notes: Types.note[] = Selectors.getNotes(selector);
 
@@ -30,6 +33,18 @@ export const play = () => {
 
       playOsc(audioContext, master.gain, playFormatNote);
     };
+
+    setCurrentTimeInterval = setInterval(() => {  
+      dispatch(Actions.setCurrentTime(audioContext.currentTime));
+      
+      if (audioContext.currentTime >= allBeats / beatsPerSecond) {
+        audioContext.close();
+        clearInterval(masterLevelInterval);
+        clearInterval(setCurrentTimeInterval);
+        dispatch(Actions.setCurrentTime(0));
+        dispatch(Actions.setPlaying(false));
+      };
+    }, 25);
 
     const data = new Uint8Array(256);
     masterLevelInterval = setInterval(() => {
@@ -50,6 +65,8 @@ export const stop = () => {
 
     audioContext.close();
     clearInterval(masterLevelInterval);
+    clearInterval(setCurrentTimeInterval);
+    dispatch(Actions.setCurrentTime(0));
     dispatch(Actions.setPlaying(false));
   };
 };

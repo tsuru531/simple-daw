@@ -1,14 +1,18 @@
 import * as React from 'react';
+import { useSelector } from "react-redux";
 import styled from 'styled-components';
+import { getBar, Types } from "../../../../../redux/audio";
+import { CurrentTimeBar } from "./CurrentTimeBar";
 import { ColumnLine } from './ColumnLine';
 import { RowLine } from './RowLine';
 import { Notes } from './Notes';
 
-const bar: number = 2;
-
 export const Scroll: React.FC = React.memo(() => {
+  const selector = useSelector((state: Types.state) => state);
+  const bar: number = getBar(selector);
   return (
-    <Container>
+    <Container props={{bar: bar}}>
+      <CurrentTimeBar />
       <ColumnLine />
       <FlexContainer>
         <RowLine />
@@ -18,7 +22,7 @@ export const Scroll: React.FC = React.memo(() => {
   );
 });
 
-const Container = styled.div`
+const Container = styled.div<{props: {bar: number}}>`
   position: relative;
   height: 100%;
   background-color: rgba(0, 0, 0, .05);
@@ -42,7 +46,7 @@ const Container = styled.div`
       rgba(0, 0, 0, .05) 50%,
       transparent 50%
     );
-  background-size: ${(2 / bar) * 100}% ${(100 / 127) * 12}%;
+  background-size: ${({props}) => (2 / props.bar) * 100}% ${(100 / 127) * 12}%;
   background-position: 0 2.63%;
 `;
 
