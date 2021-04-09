@@ -14,6 +14,17 @@ export const getCurrentTime = createSelector(
   state => state.currentTime
 );
 
+export const getCurrentTimePercentage = createSelector(
+  [audioSelector],
+  state => {
+    const allBeats: number = state.beatsPerBar * state.bar;
+    const beatsPerSecond: number = state.bpm / 60;
+    const percentage: number = (100 / allBeats) * state.currentTime * beatsPerSecond;
+
+    return percentage;
+  }
+);
+
 export const getMasterVol = createSelector(
   [audioSelector],
   state => state.masterVol
