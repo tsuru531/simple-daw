@@ -7,7 +7,7 @@ type props = {
   trackId: string
 };
 
-export const TrackContainer: React.FC<props> = ({ trackId, children }) => {
+export const TrackContainer: React.FC<props> = React.memo(({ trackId, children }) => {
   const dispatch = useDispatch();
   const selector = useSelector((state: Types.state) => state);
   const selectedTrack: string = getSelectedTrack(selector);
@@ -21,7 +21,7 @@ export const TrackContainer: React.FC<props> = ({ trackId, children }) => {
       {children}
     </Wrapper>
   );
-};
+});
 
 const Wrapper = styled.div<{isSelected: boolean}>`
   ${({isSelected}) => isSelected?

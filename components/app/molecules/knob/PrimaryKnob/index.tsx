@@ -7,7 +7,7 @@ type propsType = {
   percentage: number;
 }
 
-export const PrimaryKnob: React.FC<propsType> = ({ percentage }) => {
+export const PrimaryKnob: React.FC<propsType> = React.memo(({ percentage }) => {
   if (percentage > 100) {
     percentage = 100;
   };
@@ -25,7 +25,7 @@ export const PrimaryKnob: React.FC<propsType> = ({ percentage }) => {
         </InnerCircle>
       </Circle>
   );
-};
+});
 
 const Meter = styled.div<{angle: number, percentage: number}>`
   z-index: 1;

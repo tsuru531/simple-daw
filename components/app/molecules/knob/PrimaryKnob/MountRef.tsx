@@ -6,14 +6,14 @@ type props = {
   refObject: React.MutableRefObject<HTMLDivElement>;
 };
 
-export const MountRef: React.FC<props> = ({ children, refObject }) => {
+export const MountRef: React.FC<props> = React.memo(({ children, refObject }) => {
   return (
     <Container>
       {children}
       <Ref ref={refObject}/>
     </Container>
   );
-};
+});
 
 const Container = styled(Circle)`
   display: inline-block;

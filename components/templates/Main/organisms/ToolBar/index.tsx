@@ -5,7 +5,7 @@ import { Container } from './Container';
 import { BpmInput } from './BpmInput';
 import { ToolItems } from './ToolItems';
 
-export const ToolBar: React.FC = () => {
+export const ToolBar: React.FC = React.memo(() => {
   const dispatch = useDispatch();
   const selector = useSelector((state: Types.state) => state);
   const isPlaying = getIsPlaying(selector);
@@ -19,4 +19,4 @@ export const ToolBar: React.FC = () => {
       }
     </Container>
   );
-};
+});

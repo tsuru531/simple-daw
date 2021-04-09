@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getBpm, setBpm, Types } from '../../../../../redux/audio';
 
-export const BpmInput: React.FC = () => {
+export const BpmInput: React.FC = React.memo(() => {
   const dispatch = useDispatch();
   const selector = useSelector((state: Types.state) => state);
   const bpm = getBpm(selector);
@@ -15,4 +15,4 @@ export const BpmInput: React.FC = () => {
   return (
     <input type='number' value={bpm} onChange={onChange} />
   );
-};
+});

@@ -10,7 +10,7 @@ import {
 import { MainContainer, ContentContainer } from '../../app/atoms';
 import { ToolBar, Tracks, PianoRoll } from './organisms';
 
-export const Main: React.FC = () => {
+export const Main: React.FC = React.memo(() => {
   const selector: Types.state = useSelector((state: Types.state) => state);
   const selectedTrackId: string = getSelectedTrack(selector);
 
@@ -37,4 +37,4 @@ export const Main: React.FC = () => {
       </GridContainer>
     </MainContainer>
   );
-};
+});

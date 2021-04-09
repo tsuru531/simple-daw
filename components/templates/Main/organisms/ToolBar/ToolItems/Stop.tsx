@@ -5,10 +5,10 @@ type propsType = {
   onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 };
 
-export const Stop: React.FC<propsType> = ({ onClick }) => {
+export const Stop: React.FC<propsType> = React.memo(({ onClick }) => {
   return (
     <ToolItem onClick={onClick}>
       stop
     </ToolItem>
   );
-};
+});

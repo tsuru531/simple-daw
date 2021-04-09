@@ -10,7 +10,7 @@ type propsType = {
   bottomComponent?: React.ReactNode
 };
 
-export const ResizeContainer: React.FC<propsType> = ({ topComponent, bottomComponent }) => {
+export const ResizeContainer: React.FC<propsType> = React.memo(({ topComponent, bottomComponent }) => {
   const resizeRef = useResize();
 
   return (
@@ -24,4 +24,4 @@ export const ResizeContainer: React.FC<propsType> = ({ topComponent, bottomCompo
       </BottomContainer>
     </Container>
   );
-};
+});

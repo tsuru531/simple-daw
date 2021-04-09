@@ -5,7 +5,7 @@ import { TracksWrapper } from './TracksWrapper';
 import { AddTrackButton } from './AddTrackButton';
 import { Track } from '../../organisms';
 
-export const Tracks: React.FC = () => {
+export const Tracks: React.FC = React.memo(() => {
   const selector = useSelector(state => state);
   const tracks = getTracks(selector as Types.state);
 
@@ -24,4 +24,4 @@ export const Tracks: React.FC = () => {
       <AddTrackButton />
     </TracksWrapper>
   );
-};
+});

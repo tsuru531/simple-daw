@@ -6,7 +6,7 @@ type props = {
   id: string
 };
 
-export const TypeInput: React.FC<props> = ({ id }) => {
+export const TypeInput: React.FC<props> = React.memo(({ id }) => {
   const dispatch = useDispatch();
   const selector = useSelector((state: Types.state) => state);
   const track: Types.track = getTrack(selector, id);
@@ -27,4 +27,4 @@ export const TypeInput: React.FC<props> = ({ id }) => {
       <option value="triangle">triangle</option>
     </select>
   );
-};
+});

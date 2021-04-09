@@ -8,7 +8,7 @@ type props = {
   trackId: string
 };
 
-export const TrackVolKnob: React.FC<props> = ({ trackId }) => {
+export const TrackVolKnob: React.FC<props> = React.memo(({ trackId }) => {
   const selecter = useSelector((state: Types.state) => state);
   const percentage = getTrackVolPer(selecter, trackId);
   const ref = useTrackVolKnob(trackId);
@@ -18,4 +18,4 @@ export const TrackVolKnob: React.FC<props> = ({ trackId }) => {
       <PrimaryKnob percentage={percentage} />
     </MountRef>
   );
-};
+});

@@ -8,7 +8,7 @@ type props = {
   trackId: string
 };
 
-export const Track: React.FC<props> = ({ trackId }) => {
+export const Track: React.FC<props> = React.memo(({ trackId }) => {
   return (
     <TrackContainer trackId={trackId}>
       <TypeInput id={trackId} />
@@ -16,4 +16,4 @@ export const Track: React.FC<props> = ({ trackId }) => {
       <DeleteTrackButton trackId={trackId} />
     </TrackContainer>
   );
-};
+});
