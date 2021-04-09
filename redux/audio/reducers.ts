@@ -8,6 +8,11 @@ export const audioReducer = (state = initialState.audio, action) => {
         ...state,
         ...action.payload
       };
+    case Actions.SET_CURRENTTIME:
+      return {
+        ...state,
+        ...action.payload
+      };
     case Actions.SET_MASTER_VOL:
       return {
         ...state,

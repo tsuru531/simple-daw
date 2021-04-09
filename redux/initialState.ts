@@ -1,6 +1,7 @@
 export const initialState = {
   audio: {
     isPlaying: false,
+    currentTime: 0,
     masterVol: 1,
     masterLevel: 0,
     bpm: 120,

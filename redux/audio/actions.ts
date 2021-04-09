@@ -10,6 +10,15 @@ export const setPlaying = (status: boolean) => {
   };
 };
 
+export const SET_CURRENTTIME = "AUDIO/SET_CURRENTTIME" as const;
+export const setCurrentTime = (currentTime) => {
+  return {
+    type: SET_CURRENTTIME,
+    payload: {
+      currentTime: currentTime
+    }
+  };
+};
 
 export const SET_MASTER_VOL = "SET_MASTER_VOL";
 export const setMasterVol = (value) => {

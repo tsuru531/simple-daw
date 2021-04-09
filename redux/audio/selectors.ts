@@ -9,6 +9,11 @@ export const getIsPlaying = createSelector(
   state => state.isPlaying
 );
 
+export const getCurrentTime = createSelector(
+  [audioSelector],
+  state => state.currentTime
+);
+
 export const getMasterVol = createSelector(
   [audioSelector],
   state => state.masterVol
