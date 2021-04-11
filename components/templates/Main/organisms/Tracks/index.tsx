@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { getTracks, Types } from '../../../../../redux/audio';
-import { TracksWrapper } from './TracksWrapper';
+import { TracksContainer } from './TracksContainer';
 import { AddTrackButton } from './AddTrackButton';
 import { Track } from '../../organisms';
 
@@ -10,7 +10,7 @@ export const Tracks: React.FC = React.memo(() => {
   const tracks = getTracks(selector as Types.state);
 
   return (
-    <TracksWrapper>
+    <TracksContainer>
       <ul>
         {tracks.map(track => {
           const trackId = track.id;
@@ -22,6 +22,6 @@ export const Tracks: React.FC = React.memo(() => {
         })}
       </ul>
       <AddTrackButton />
-    </TracksWrapper>
+    </TracksContainer>
   );
 });

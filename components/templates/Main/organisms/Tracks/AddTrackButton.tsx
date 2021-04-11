@@ -19,8 +19,10 @@ export const AddTrackButton: React.FC = React.memo(() => {
 const Button = styled.button`
   width: 100%;
   height: 62px;
-  border-top: solid 1px #888888;
-  border-bottom: solid 1px #888888;
+  background-color: rgba(0, 0, 0, .05);
+  border-top: solid 1px rgba(0, 0, 0, .1);
+  border-bottom: solid 2px rgba(0, 0, 0, .1);
+  cursor: pointer;
 `;
 
 const Centering = styled.div`
