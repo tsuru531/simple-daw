@@ -168,14 +168,25 @@ export const updateNote = (newNote: Types.note) => {
   return (dispatch, getState) => {
     const selector: Types.state = getState();
     const notes: Types.note[] = Selectors.getNotes(selector);
+    const range: number = Selectors.getFluctuationRange(selector);
+    const allBeats: number = Selectors.getAllBeats(selector);
+    const scaleCount: number = Selectors.getScaleCount(selector);
+    
     const newNotes: Types.note[] = notes.map(note => {
-      if (note.id === newNote.id) {
-        if (newNote.length <= 0) newNote.length = note.length;
+      if (note.id !== newNote.id) return note;
 
-        return newNote;
+      if (newNote.length <= 0) newNote.length = range;
+      if (newNote.keyNum < 0) newNote.keyNum = 0;
+      if (newNote.keyNum >= scaleCount) newNote.keyNum = scaleCount - 1;
+      if (
+        newNote.startTime < 0 ||
+        newNote.startTime + newNote.length > allBeats
+      ) {
+        newNote.length = note.length;
+        newNote.startTime = note.startTime;
       };
 
-      return note;
+      return newNote;
     });
 
     dispatch(Actions.setNotes(newNotes));
