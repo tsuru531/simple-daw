@@ -41,9 +41,14 @@ const FlexContainer = styled.div<{
 const Body = styled.div`
   flex-grow: 1;
   height: 100%;
+  cursor: grab;
+  &:active {
+    cursor: grabbing;
+  }
 `;
 
 const End = styled.div`
   flex-basis: 4px;
   height: 100%;
+  cursor: ew-resize;
 `;
