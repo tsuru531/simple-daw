@@ -1,0 +1,25 @@
+.bottomContainer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.resizeBar {
+  cursor: row-resize;
+  position: absolute;
+  top: 50%;
+  height: 8px;
+  width: 100%;
+}
+
+.topContainer {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
