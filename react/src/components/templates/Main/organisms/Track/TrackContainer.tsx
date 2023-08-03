@@ -16,15 +16,15 @@ export const TrackContainer: React.FC<props> = React.memo(({ trackId, children }
   return (
     <Container
       onClick={() => dispatch(setSelectedTrack(trackId))}
-      isSelected={isSelected}
+      $isSelected={isSelected}
     >
       {children}
     </Container>
   );
 });
 
-const Container = styled.div<{isSelected: boolean}>`
-  ${({isSelected}) => isSelected?
+const Container = styled.div<{ $isSelected: boolean }>`
+  ${({$isSelected}) => $isSelected?
     "background-color: #AAAAAA;":
     "background-color: #888888;"
   }

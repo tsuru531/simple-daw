@@ -11,7 +11,7 @@ export const Scroll: React.FC = React.memo(() => {
   const selector = useSelector((state: Types.state) => state);
   const bar: number = getBar(selector);
   return (
-    <Container props={{bar: bar}}>
+    <Container $props={{bar: bar}}>
       <CurrentTimeBar />
       <ColumnLine />
       <FlexContainer>
@@ -22,7 +22,7 @@ export const Scroll: React.FC = React.memo(() => {
   );
 });
 
-const Container = styled.div<{props: {bar: number}}>`
+const Container = styled.div<{$props: {bar: number}}>`
   position: relative;
   height: 100%;
   background-color: rgba(0, 0, 0, .05);
@@ -46,7 +46,7 @@ const Container = styled.div<{props: {bar: number}}>`
       rgba(0, 0, 0, .05) 50%,
       transparent 50%
     );
-  background-size: ${({props}) => (2 / props.bar) * 100}% ${(100 / 127) * 12}%;
+  background-size: ${({$props}) => (2 / $props.bar) * 100}% ${(100 / 127) * 12}%;
   background-position: 0 2.63%;
 `;
 

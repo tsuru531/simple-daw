@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-export const ContentContainer: React.FC = React.memo(({ children }) => {
+export const ContentContainer: React.FC<{ children: React.ReactNode }> = React.memo(({ children }) => {
   return (
     <Container>
       <Inner>

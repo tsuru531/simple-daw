@@ -24,7 +24,7 @@ const Button = styled.button`
     background-color: rgba(255, 255, 255, .2);
     cursor: pointer;
   }
-  
+
   & > div {
     width: 24px;
     height: 24px;

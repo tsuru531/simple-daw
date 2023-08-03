@@ -36,10 +36,10 @@ const Scale = styled.div`
 const Color = styled.div<props>`
   width: 20px;
   height: 100%;
-  ${props => props.color === 'black' && `
+  ${$props => $props.color === 'black' && `
   background-color: black;
   `}
-  ${props => props.color === 'white' && `
+  ${$props => $props.color === 'white' && `
   background-color: white;
   `}
 `;

@@ -16,7 +16,7 @@ export const Note: React.FC<props> = React.memo(({...props}) => {
   const noteRefs = useNote(props.note, props.notesRef);
 
   return (
-    <FlexContainer note={props.note}>
+    <FlexContainer $note={props.note}>
       <End ref={noteRefs.left} />
       <Body ref={noteRefs.body} />
       <End ref={noteRefs.right} />
@@ -25,11 +25,11 @@ export const Note: React.FC<props> = React.memo(({...props}) => {
 });
 
 const FlexContainer = styled.div<{
-  note: Types.note
+  $note: Types.note
 }>`
-  bottom: ${props => (100 / scaleCount) * props.note.keyNum}%;
-  left: ${props => 100 / (beatsPerBar * bar) * props.note.startTime}%;
-  width: ${props => (100 / (beatsPerBar * bar)) * props.note.length}%;
+  bottom: ${$props => (100 / scaleCount) * $props.$note.keyNum}%;
+  left: ${$props => 100 / (beatsPerBar * bar) * $props.$note.startTime}%;
+  width: ${$props => (100 / (beatsPerBar * bar)) * $props.$note.length}%;
   height: ${100 / scaleCount}%;
   background-color: yellow;
   display: flex;

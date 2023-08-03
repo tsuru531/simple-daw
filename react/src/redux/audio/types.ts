@@ -1,6 +1,6 @@
 import { initialState } from '../initialState';
 import { playFormat, wave } from "../../models/audio/types";
-export { playFormat, wave };
+export type { playFormat, wave };
 
 export type state = typeof initialState;
 
